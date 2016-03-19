@@ -42,17 +42,17 @@ public class Fragment {
         char work [] = frag.toCharArray();
         for (int i = work.length-1;i>=0;i--){
             switch (work[i]) {
-                case 'a':
-                    compl += 't';
+                case 'A':
+                    compl += 'T';
                     break;
-                case 't':
-                    compl += 'a';
+                case 'T':
+                    compl += 'A';
                     break;
-                case 'c':
-                    compl += 'g';
+                case 'C':
+                    compl += 'G';
                     break;
-                case 'g':
-                    compl += 'c';
+                case 'G':
+                    compl += 'C';
                     break;
                 default:
                     compl += GAP ;

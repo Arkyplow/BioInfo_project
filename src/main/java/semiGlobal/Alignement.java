@@ -125,15 +125,15 @@ public class Alignement {
 	}
 	public Fragment aligne( Fragment s, Fragment t){
 		String ret= "";
-		int[][] matrice = matriceSim(s,t);
-		int[] tmp = getBestScore(matrice,s,t);
+		int[][] matrice = matriceSim(s,t); //(O(n*m)
+		int[] tmp = getBestScore(matrice,s,t); //(O(m+n))
 		int ib = tmp[0];
 		int jb = tmp[1];
 		//differencier si best est trouver en fin de S ou en fin de T
 		if(ib==s.length()) // best en fin de S => copier partie jb->m de t    0__________jb_________m
-			ret = t.substring(jb);
+			ret = t.substring(jb); // O(1)
 		if(jb == t.length()) // best en fin de T => copier partie ib->n de s    0__________ib_________n
-			ret = s.substring(ib);
+			ret = s.substring(ib); // O(1)
 		while(jb !=0 && ib !=0){
 			if(matrice[ib][jb] == matrice[ib-1][jb]+getGap()){ // gap en s
 				ret = s.get(ib-1) + ret;
