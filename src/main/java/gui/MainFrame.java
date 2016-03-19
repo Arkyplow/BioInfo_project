@@ -18,11 +18,6 @@ public class MainFrame {
 	 * @param args parametre min fenetre principale
      */
 	public static void main(String[] args) {
-		int b = 2;
-		int a =b;
-		int n = 3/2;
-		b+=1;
-		System.out.println(a+" "+n);
 		ArrayList<Fragment> frags = FileHelper.load("/home/nanabaskint/Git/BioInfo_project/datas/Collections/10000/collection1.fasta");
 		Fragment T = new Fragment("ATCGGCATTCAGT");//.getComplementaire();//frags.get(0); //
 		Fragment S = new Fragment("ATTAGACCATGCGGC");//.getComplementaire();//frags.get(1); //
