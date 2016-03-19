@@ -1,0 +1,34 @@
+-pour tout fragment lu dans fichier {
+	a chaque fois qu'on lis un fragment : 
+		ajouer nouveau sommet dans graph
+		construire les arc avec les autres sommets deja present dans le graph 
+}
+
+arc de F a G => 
+	F G  		(**)
+	Ft Gt		(**)
+	Ft G		(**)
+	F Gt		(**)
+	8 comparaison a faire ==> 4 matrice a faire ( matrice(F,G) = transposer(matrice(G,F)) 
+
+comment impltementer concretement => arc de F a G dois contenir 8 comparaison et chaque comparaison doit contenir le type de la comparaison ( ** ) et sauver le score a chaque fois ?????? bonne solution ?????
+
+
+
+
+-trier les comparaison  par score décroissant ( comment faire si on represente 8 comparaisons comme un seul arc ? ) 
+
+
+
+-chercher chemin hamilto (depends de la representation de comparaison ) 
+
+
+
+
+consensus pour construire l aligneent final (choisir le consensus ) ==> probeme : F = AAAAAATAAAAAG , T = TAAAAA Z = AATGCTAG ==>  ( F aligne avec T ) algine avec Z
+
+==> 	AAAAAATAAAAAG
+	______TAAAAA_	
+	_________AATGCTAG
+	           ?
+= 	AAAAAATAAAA?GCTAG
