@@ -61,6 +61,9 @@ public class Fragment {
         }
         return new Fragment(compl);
     }
+    public String substring(int i){
+        return frag.substring(i);
+    }
     public String toString() {
         return  frag ;
     }

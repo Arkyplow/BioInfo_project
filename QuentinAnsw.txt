@@ -1,0 +1,21 @@
+
+Bonjour,
+
+En effet, en entrées vous avez des collections de fragments (dont on ne connait pas l'orientation, donc il faut considérer les complémentaires inversés également)
+
+Ensuite, il faut construire un graphe, où chaque noeud correspond à un fragment. Deux noeuds sont reliés par une flèche pondérée, où ce poids correspond à l'alignement semi-global entre ces deux fragments. Ce poids et cet alignement se calculent à l'aide d'une matrice.
+
+Pour deux fragments donnés, il y a en effet 8 alignements théoriques à regarder.
+
+L'algorithme Greedy va construire un chemin hamiltonien: l'heuristique derrière est que l'on veut maximiser les chevauchements (ici, l'alignement semi-global) et donc on prend la flèche de plus haut poids parmi toutes et on construit ce chemin petit à petit.
+
+Ces étapes sont (théoriquement) faciles puisque tout est expliqué soit dans le cours, soit dans mes slides.
+
+La partie où je n'ai pas beaucoup expliqué (parce que c'est votre travail), c'est l'étape où tu veux globalement aligner tous tes fragments pour n'obtenir qu'un contig final grâce au consensus.
+En effet, grâce aux chemins hamiltonien calculé précédemment, tu connais dans quel ordre mettre tes fragements, et les alignements semi-global deux à deux. Là repose le problème: passer de deux-à-deux à "global". L'idée est qu'un alignement entre deux fragments f et g peut influencer celui entre les fragments g et h.
+
+
+En espérant t'avoir aidé. N'hésite pas si tu as d'autres questions.
+
+Quentin
+
