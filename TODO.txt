@@ -40,12 +40,12 @@ avec cette representation on ne fait plus la difference dès qu'on passe par un 
 
 
 
--trier les comparaison  par score décroissant ( comment faire si on represente 8 comparaisons comme un seul arc ? )  
+-trier les comparaison par score décroissant ( comment faire si on represente 8 comparaisons comme un seul arc ? )  
 
 
 SOLUTIONS : 
 1 ) stocker TOUS les arcs dans un AVL ( en le gardant trie ==> evite le trie a la fin )
-2) utiliser tas pour le trie et hashtable pour stocker les arcs 
+2) utiliser tas pour stocker les arcs (on triera au dernier moment ) & utiliser hashtable pour stocker les sommet 
 
 
 => complexité trie en generel => O(n²) trie AVL/heap => O(n*log(n))  ==> faire une seule fois le trie des qu'on a ajouter tous les arc ? ( oui ) 

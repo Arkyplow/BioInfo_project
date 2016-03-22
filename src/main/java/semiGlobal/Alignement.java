@@ -123,6 +123,10 @@ public class Alignement {
 		}
 		return returne;
 	}
+	public int[] getBestScores(Fragment G , Fragment T){
+		int[] retour = new int[2];
+		return retour;
+	}
 	public Fragment aligne( Fragment s, Fragment t){
 		String ret= "";
 		int[][] matrice = matriceSim(s,t); //(O(n*m)
