@@ -1,11 +1,8 @@
 package gui;
 
-import semiGlobal.Alignement;
-import semiGlobal.fragment.Fragment;
-import utils.FileHelper;
+import overlap.Overlap;
 
 import javax.swing.*;
-import java.util.ArrayList;
 
 /**
  * fenetre principale
@@ -18,7 +15,7 @@ public class MainFrame {
 	 * @param args parametre min fenetre principale
      */
 	public static void main(String[] args) {
-		ArrayList<Fragment> frags = FileHelper.load("/home/nanabaskint/Git/BioInfo_project/datas/Collections/10000/collection1.fasta");
+		/*ArrayList<Fragment> frags = FileHelper.load("/home/nanabaskint/Git/BioInfo_project/datas/Collections/10000/collection1.fasta");
 		Fragment T = new Fragment("ATCGGCATTCAGT");//.getComplementaire();//frags.get(0); //
 		Fragment S = new Fragment("ATTAGACCATGCGGC");//.getComplementaire();//frags.get(1); //
 		Alignement ali = new Alignement();
@@ -36,7 +33,14 @@ public class MainFrame {
 		System.out.println("S = "+S+ " "+S.length());
 		System.out.println("T = "+T+" "+T.length());
 		Fragment result = ali.aligne(S,T);
-		System.out.println("result : "+result +" "+result.length());
+		System.out.println("result : "+result +" "+result.length());*/
+		Overlap graph = Overlap.build("/home/nanabaskint/Git/BioInfo_project/datas/Collections/10000/collection1.fasta");
+		//Overlap graph = Overlap.build("/home/nanabaskint/Git/BioInfo_project/test/test.fasta");
+		int  n = graph.getSommets().size();
+		System.out.println("nombre de sommets  n = "+n);
+		System.out.println("nombre d'ars a construire (n*(n-1))*4 = "+(n*(n-1))*4);
+		System.out.println("nombre d'arc construit par l'algo : "+graph.getArcs().size());
+		System.out.println("nombre d'arc manqant  : "+(graph.getArcs().size() - (n*(n-1))*4));
 		//initializeMain();
 	}
 

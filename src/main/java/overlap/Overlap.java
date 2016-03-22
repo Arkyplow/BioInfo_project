@@ -48,7 +48,7 @@ public class Overlap {
 					line = br.readLine();
 				}
 				retour.addSommet(new Sommet(new Fragment(buff)));
-				//ArcBuilder.build(ali,retour,(index+=1));
+				ArcBuilder.build(ali,retour,(index+=1));
 				br.close();
 				fr.close();
 			}
