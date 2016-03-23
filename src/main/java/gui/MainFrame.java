@@ -34,13 +34,20 @@ public class MainFrame {
 		System.out.println("T = "+T+" "+T.length());
 		Fragment result = ali.aligne(S,T);
 		System.out.println("result : "+result +" "+result.length());*/
+
+		long debut = System.currentTimeMillis();
 		Overlap graph = Overlap.build("/home/nanabaskint/Git/BioInfo_project/datas/Collections/10000/collection1.fasta");
+		System.out.println("Bio-Info");
+		System.out.println("temps calcule des alignements : "+(double)(System.currentTimeMillis()-debut)/1000+"s");
 		//Overlap graph = Overlap.build("/home/nanabaskint/Git/BioInfo_project/test/test.fasta");
 		int  n = graph.getSommets().size();
-		System.out.println("nombre de sommets  n = "+n);
-		System.out.println("nombre d'ars a construire (n*(n-1))*4 = "+(n*(n-1))*4);
-		System.out.println("nombre d'arc construit par l'algo : "+graph.getArcs().size());
-		System.out.println("nombre d'arc manqant  : "+(graph.getArcs().size() - (n*(n-1))*4));
+		System.out.println("nombre de fragments d'ADN  n = "+n);
+		System.out.println("# alignements a calculer => (n*(n-1))*4 = "+(n*(n-1))*4);
+		System.out.println("# alignements calcules : "+graph.getArcs().size());
+		System.out.println("# alignements manquants  : " +(((n*(n-1))*4)- graph.getArcs().size() ));
+		/*for(Arc c : graph.getArcs()){
+			System.out.println(c.getScore());
+		}*/
 		//initializeMain();
 	}
 
@@ -52,7 +59,6 @@ public class MainFrame {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(400,600);
 		JTabbedPane tabPanel = new JTabbedPane(JTabbedPane.TOP,JTabbedPane.SCROLL_TAB_LAYOUT );
-
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 

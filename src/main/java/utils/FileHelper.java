@@ -1,6 +1,6 @@
 package utils;
 
-import semiGlobal.fragment.Fragment;
+import semiGlobal.Fragment;
 
 import java.io.*;
 import java.util.ArrayList;
