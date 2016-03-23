@@ -1,4 +1,4 @@
-package semiGlobal.fragment;
+package semiGlobal;
 
 /**
  * representation d'un fragment
@@ -61,10 +61,21 @@ public class Fragment {
         }
         return new Fragment(compl);
     }
+
+	/**
+     * Permet de  recuperer la partie du fragment commencant a l indice i
+     * @param i l indice
+     * @return la partie du fragment commencant a l indice i
+     */
     public String substring(int i){
         return frag.substring(i);
     }
-    public String toString() {
+
+	/**
+	 * toString()
+	 * @return toString()
+	 */
+	public String toString() {
         return  frag ;
     }
 }
