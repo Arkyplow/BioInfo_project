@@ -2,7 +2,7 @@ package overlap;
 
 import semiGlobal.Alignement;
 import semiGlobal.ArcBuilder;
-import semiGlobal.fragment.Fragment;
+import semiGlobal.Fragment;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -15,17 +15,70 @@ public class Overlap {
 
     private ArrayList<Sommet> sommets = new ArrayList<Sommet>();
     private ArrayList<Arc> arcs = new ArrayList<Arc>();
-    public Overlap(){}
+
+	/**
+	 * Constructeur
+	 */
+	public Overlap(){}
+
+	/**
+	 * Permet d ajouter un arc au graph
+	 * @param arc larc a ajouter
+	 */
 	public void addArc(Arc arc){
 		arcs.add(arc);
 	}
-    public void addSommet(Sommet s ){
-        sommets.add(s);
-    }
-    public static Overlap build(String filename){
+
+	/**
+	 * Permet d ajouter un sommet au graph
+	 * @param s le sommet a ajouter
+	 */
+	public void addSommet(Sommet s ){
+		sommets.add(s);
+	}
+
+	/**
+	 * Permet de recuperer l arc d indice "index"
+	 * @param index l 'indice de l arc
+	 * @return L arc d indice "index"
+	 */
+	public Arc getArc(int index){
+		return arcs.get(index);
+	}
+
+	/**
+	 * Permet de recuperer l ensemble des arcs du graph
+	 * @return L ensemble des arcs du graph
+	 */
+	public ArrayList<Arc> getArcs(){
+		return arcs;
+	}
+
+	/**
+	 * Permet de recuperer le sommet d indice "index"
+	 * @param index l 'indice du sommet
+	 * @return Le sommet d indice "index"
+	 */
+	public Sommet getSommet(int index){
+		return sommets.get(index);
+	}
+
+	/**
+	 * Permet de recuperer l ensemble des sommets du graph
+	 * @return L ensemble des sommets du graph
+	 */
+	public ArrayList<Sommet> getSommets() {
+		return sommets;
+	}
+
+	/**
+	 * Permet de construire un graph pour les fragments contenu dans le fichier "filename"
+	 * @param filename le nom du fichier
+	 * @return Un graph pour les fragments contenu dans le fichier "filename"
+	 */
+	public static Overlap build(String filename){
 		Overlap retour = new Overlap();
 		Alignement ali = new Alignement();
-		int index = -1;
 		try{
 			File f = new File (filename);
 			FileReader fr = new FileReader (f);
@@ -38,7 +91,6 @@ public class Overlap {
 					if(!line.isEmpty()){
 						if(line.contains(">") && !buff.isEmpty()){
 							retour.addSommet(new Sommet(new Fragment(buff)));
-							ArcBuilder.build(ali,retour,(index+=1));
 							buff = "";
 						}
 						else if(!line.contains(">")){
@@ -48,7 +100,7 @@ public class Overlap {
 					line = br.readLine();
 				}
 				retour.addSommet(new Sommet(new Fragment(buff)));
-				ArcBuilder.build(ali,retour,(index+=1));
+
 				br.close();
 				fr.close();
 			}
@@ -59,18 +111,7 @@ public class Overlap {
 		}catch (FileNotFoundException exception){
 			System.out.println ("Le fichier n'a pas été trouvé");
 		}
+		new ArcBuilder().build(retour);
 		return retour;
-	}
-	public Arc getArc(int index){
-		return arcs.get(index);
-	}
-	public ArrayList<Arc> getArcs(){
-		return arcs;
-	}
-	public Sommet getSommet(int index){
-		return sommets.get(index);
-	}
-	public ArrayList<Sommet> getSommets() {
-		return sommets;
 	}
 }

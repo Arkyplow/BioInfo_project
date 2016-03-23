@@ -5,8 +5,8 @@ package overlap;
  * @author Jannou Brohee
  */
 public class Arc {
-    private short indexSommetSrc;
-    private short indexSommetDst;
+    private int indexSommetSrc;
+    private int indexSommetDst;
     private int score;
     private boolean srcC= false;
     private boolean dstC = false;
@@ -19,7 +19,7 @@ public class Arc {
 	 * @param _dstC true si on prends le complementaire de la source
 	 * @param _score le score de l alignement
 	 */
-    public Arc(short _indexSommetSrc, short _indexSommetDst, boolean _srcC, boolean _dstC, int _score){
+    public Arc(int _indexSommetSrc, int _indexSommetDst, boolean _srcC, boolean _dstC, int _score){
         indexSommetSrc = _indexSommetSrc;
         indexSommetDst = _indexSommetDst;
         srcC = _srcC;
@@ -39,7 +39,7 @@ public class Arc {
 	 * Retourne l index du sommet source
 	 * @return L index du sommet source
 	 */
-    public short getSource(){
+    public int getSource(){
         return indexSommetSrc;
     }
 
@@ -47,7 +47,7 @@ public class Arc {
 	 * Retourne l index du sommet destination
 	 * @return L index du sommet destination
 	 */
-    public short getDestination(){
+    public int getDestination(){
 		return indexSommetDst;
     }
 
