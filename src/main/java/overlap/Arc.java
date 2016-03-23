@@ -5,36 +5,72 @@ package overlap;
  * @author Jannou Brohee
  */
 public class Arc {
-    private int indexSommetSrc;
-    private int indexSommetDst;
+    private short indexSommetSrc;
+    private short indexSommetDst;
     private int score;
     private boolean srcC= false;
     private boolean dstC = false;
-    public Arc(int _indexSommetSrc, int _indexSommetDst, boolean _srcC, boolean _dstC, int _score){
+
+	/**
+	 * Constructeur
+	 * @param _indexSommetSrc index du sommet source
+	 * @param _indexSommetDst index du sommet destination
+	 * @param _srcC true si on prends le complementaire de la source
+	 * @param _dstC true si on prends le complementaire de la source
+	 * @param _score le score de l alignement
+	 */
+    public Arc(short _indexSommetSrc, short _indexSommetDst, boolean _srcC, boolean _dstC, int _score){
         indexSommetSrc = _indexSommetSrc;
         indexSommetDst = _indexSommetDst;
         srcC = _srcC;
         dstC = _dstC;
         score = _score;
     }
+
+	/**
+	 * Met a jour le score
+	 * @param i le nouveau score
+	 */
     public void setScore(int i){
         score = i;
     }
-    public void compute(Sommet src , Sommet dst){
 
-    }
-    public int getSource(){
+	/**
+	 * Retourne l index du sommet source
+	 * @return L index du sommet source
+	 */
+    public short getSource(){
         return indexSommetSrc;
     }
-    public int getDestination(){
+
+	/**
+	 * Retourne l index du sommet destination
+	 * @return L index du sommet destination
+	 */
+    public short getDestination(){
 		return indexSommetDst;
     }
+
+	/**
+	 * Retourne true si on prends le complementaire de la source false sinon
+	 * @return true si on prends le complementaire de la source false sinon
+	 */
 	public boolean getSrcC(){
 		return srcC;
 	}
+
+	/**
+	 * Retourne true si on prends le complementaire de la destionation false sinon
+	 * @return true si on prends le complementaire de la destionation false sinon
+	 */
 	public boolean getDstC(){
 		return dstC;
 	}
+
+	/**
+	 * Retourne le score
+	 * @return Le score
+	 */
 	public int getScore(){
 		return score;
 	}
