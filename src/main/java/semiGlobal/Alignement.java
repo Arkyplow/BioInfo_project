@@ -1,7 +1,5 @@
 package semiGlobal;
 
-import semiGlobal.fragment.Fragment;
-
 /**
  * @author Jannou Brohee
  */
@@ -125,6 +123,24 @@ public class Alignement {
 	}
 	public int[] getBestScores(Fragment G , Fragment T){
 		int[] retour = new int[2];
+		int[][] matrice = matriceSim(G,T);
+		int score=0;
+		for(int i=1;i<=G.length();i++){
+			if(matrice[i][T.length()]>score){
+				retour[0]= matrice[i][T.length()];
+				//returne[0]=i;
+				//returne[1]=t.length();
+			}
+		}
+		score=0;
+		for(int j=1;j<=T.length();j++){
+			if(matrice[G.length()][j]>score){
+				retour[1] = matrice[G.length()][j];
+				//returne[0]=s.length();
+				//returne[1]=j;
+			}
+		}
+
 		return retour;
 	}
 	public Fragment aligne( Fragment s, Fragment t){
