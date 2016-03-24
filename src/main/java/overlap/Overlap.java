@@ -15,7 +15,10 @@ public class Overlap {
 
     private ArrayList<Sommet> sommets = new ArrayList<Sommet>();
     private ArrayList<Arc> arcs = new ArrayList<Arc>();
-
+	/*int max = 0;
+	int maxIndex = 0;
+	int min = 0;
+	int minIndex = 0;*/
 	/**
 	 * Constructeur
 	 */
@@ -27,8 +30,17 @@ public class Overlap {
 	 */
 	public void addArc(Arc arc){
 		arcs.add(arc);
+		int i = arcs.size()-1;
+		while(i>0 && arcs.get((i-i%2)/2).getScore()<=arcs.get(i).getScore()){
+			Arc tmp = arcs.get((i-i%2)/2);
+			arcs.set((i-i%2)/2,arcs.get(i));
+			arcs.set(i,tmp);
+			i=(i-i%2)/2;
+		}
 	}
-
+	public void setArcs(ArrayList<Arc> _arcs){
+		arcs=_arcs;
+	}
 	/**
 	 * Permet d ajouter un sommet au graph
 	 * @param s le sommet a ajouter
@@ -112,7 +124,7 @@ public class Overlap {
 			System.out.println ("Le fichier n'a pas été trouvé");
 		}
 		new ArcBuilder().build(retour);
-		//trie des arc par poids decroissant
+		HeapSort.Sort(retour);
 		return retour;
 	}
 }
