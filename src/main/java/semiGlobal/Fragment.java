@@ -54,6 +54,18 @@ public class Fragment {
                 case 'G':
                     compl += 'C';
                     break;
+                case 'a':
+                    compl += 't';
+                    break;
+                case 't':
+                    compl += 'a';
+                    break;
+                case 'c':
+                    compl += 'g';
+                    break;
+                case 'g':
+                    compl += 'c';
+                    break;
                 default:
                     compl += GAP ;
                     break;

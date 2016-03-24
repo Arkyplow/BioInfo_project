@@ -124,25 +124,64 @@ public class Alignement {
 	public int[] getBestScores(Fragment G , Fragment T){
 		int[] retour = new int[2];
 		int[][] matrice = matriceSim(G,T);
-		int score=0;
-		for(int i=1;i<=G.length();i++){
-			if(matrice[i][T.length()]>score){
-				retour[0]= matrice[i][T.length()];
-				//returne[0]=i;
-				//returne[1]=t.length();
-			}
-		}
-		score=0;
+		int tmpscore=0;
+		int iG = 0,iT=0,jG = 0,jT=0; // iS,jS ==> indice quand on commence par S
 		for(int j=1;j<=T.length();j++){
-			if(matrice[G.length()][j]>score){
-				retour[1] = matrice[G.length()][j];
-				//returne[0]=s.length();
-				//returne[1]=j;
+			if(matrice[G.length()][j]>tmpscore){
+				tmpscore = matrice[G.length()][j];
+				iG=G.length();
+				jG=j;
 			}
 		}
-
+		tmpscore=0;
+		for(int i=1;i<=G.length();i++){
+			if(matrice[i][T.length()]>tmpscore){
+				tmpscore= matrice[i][T.length()];
+				iT=i;
+				jT=T.length();
+			}
+		}
+		//score pour G -> T
+		while(jG !=0 && iG !=0){
+			if(matrice[iG][jG] == matrice[iG-1][jG]+getGap()){ // gap en s
+				iG--;
+				retour[0]+=(int)getGap();
+			}
+			else if(matrice[iG][jG] == matrice[iG][jG-1]+getGap()){ // gap en t
+				jG --;
+				retour[0]+=(int)getGap();
+			}
+			else if(matrice[iG][jG] == matrice[iG - 1][jG - 1] + getMatchScore(G.get(iG - 1), T.get(jG - 1))) {
+				if (getMatchScore(G.get(iG - 1), T.get(jG - 1)) == getMatch())
+					retour[0]+=(int)getMatch();
+				else
+					retour[0]+=(int)getMismatch();
+				iG--;
+				jG--;
+			}
+		}
+		// score pour T -> G
+		while(jT !=0 && iT !=0){
+			if(matrice[iT][jT] == matrice[iT-1][jT]+getGap()){ // gap en s
+				iT--;
+				retour[1]+=(int)getGap();
+			}
+			else if(matrice[iT][jT] == matrice[iT][jT-1]+getGap()){ // gap en t
+				jT --;
+				retour[1]+=(int)getGap();
+			}
+			else if(matrice[iT][jT] == matrice[iT - 1][jT - 1] + getMatchScore(G.get(iT - 1), T.get(jT - 1))) {
+				if (getMatchScore(G.get(iT - 1), T.get(jT - 1)) == getMatch())
+					retour[1]+=(int)getMatch();
+				else
+					retour[1]+=(int)getMismatch();
+				iT--;
+				jT--;
+			}
+		}
 		return retour;
 	}
+	// score ici
 	public Fragment aligne( Fragment s, Fragment t){
 		String ret= "";
 		int[][] matrice = matriceSim(s,t); //(O(n*m)

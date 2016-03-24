@@ -112,6 +112,7 @@ public class Overlap {
 			System.out.println ("Le fichier n'a pas été trouvé");
 		}
 		new ArcBuilder().build(retour);
+		//trie des arc par poids decroissant
 		return retour;
 	}
 }
