@@ -1,67 +1,9 @@
--pour tout fragment lu dans fichier {
-	a chaque fois qu'on lis un fragment : 
-		ajouer nouveau sommet dans graph
--construire les arc 
-}
-
-
-
-
-
-
-arc de F a G => 
-	F G  		(**)
-	Ft Gt		(**)
-	Ft G		(**)
-	F Gt		(**)
-	8 comparaison a faire ==> 4 matrice a faire ( matrice(F,G) = transposer(matrice(G,F)) 
-
--comment impltementer concretement : arc de F a G dois contenir 8 comparaison et chaque comparaison doit contenir le type de la comparaison ( ** ) et sauver le score a chaque fois ?????? bonne solution : nope
-
-SOLUTION :
-
 arc (sommet in ,sommet out, boolean sommetInIsComplemented,  boolean sommetOutIsComplemented, int score) ==> permmet de repressenter 4 comparaison ( F -> G , F -> Gt, Ft -> G , Ft-> Gt)
 mais on aura a chaque fois un arc par comparaison
 
  
 Sommet(boolean out, boolean in)  ==> lors du recherche de chemin on ne doit pas faire de discinction avec le complement , si on entre dans un sommet et qu'on en sort on doit exclure son complement aussi
 avec cette representation on ne fait plus la difference dès qu'on passe par un somment ( que ce soit par con complement ou on ) on ne repassera jamais dedans de cette façon 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
--trier les comparaison par score décroissant ( comment faire si on represente 8 comparaisons comme un seul arc ? )  
-
-
-SOLUTIONS : 
-1 ) stocker TOUS les arcs dans un AVL ( en le gardant trie ==> evite le trie a la fin ) 											NON 
-2) utiliser tas pour stocker les arcs (on triera au dernier moment ) & utiliser hashtable pour stocker les sommet 								OUI
-
-
-=> complexité trie en generel => O(n²) trie AVL/heap => O(n*log(n))  ==> faire une seule fois le trie des qu'on a ajouter tous les arc ? ( oui ) 
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -73,10 +15,40 @@ SOLUTIONS :
 
 
 
+
+
+
+
+
 consensus pour construire l aligneent final (choisir le consensus ) ==> probeme : F = AAAAAATAAAAAG , T = TAAAAA Z = AATGCTAG ==>  ( F aligne avec T ) algine avec Z
 
-==> 	AAAAAATAAAAAG
-	______TAAAAA_	
-	_________AATGCTAG
-	           ?
-= 	AAAAAATAAAA?GCTAG
+
+
+Vote de majorité 
+==> 	AAAAAATAAAAG
+	______TAAAA_	
+	________AATGCTAG
+	          ?
+= 	AAAAAATAAA?GCTAG     
+
+
+
+
+
+contig local ==> contig global 
+==> 	AAAAAATAAAAG 		F
+	______TAAAA_		G
+	
+==>     T_AAAA			G
+	TGAAAATGCTAG		T 
+
+	           
+= 	????????????
+
+
+3 grands cas :
+
+	1°      F inclus dans G 
+	2-3°    F et G se chevauche ( la fin de F avec le debut de G ou inversement ) 
+
+
