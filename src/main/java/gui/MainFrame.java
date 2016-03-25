@@ -1,5 +1,9 @@
 package gui;
 
+import java.util.ArrayList;
+
+import overlap.Arc;
+import overlap.HamiltonPath;
 import overlap.Overlap;
 
 import javax.swing.*;
@@ -61,6 +65,11 @@ public class MainFrame {
 		//Fragment result = new Alignement().aligne(graph.getSommet(0).getComplementaire(),graph.getSommet(1).getFrag());
 		//System.out.println("result : "+result +" "+result.length());
 		//initializeMain();
+		/*ArrayList<Arc> arcs = HamiltonPath.greedy(graph);
+		for(Arc arc : arcs){
+			System.out.print(arc.getSource() + " - " + arc.getDestination() + " - ");
+		}
+		System.out.println("\n" + arcs.size());*/
 	}
 
 	/**
