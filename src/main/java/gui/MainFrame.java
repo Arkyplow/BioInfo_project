@@ -1,6 +1,5 @@
 package gui;
 
-import overlap.Arc;
 import overlap.Overlap;
 
 import javax.swing.*;
@@ -52,11 +51,11 @@ public class MainFrame {
 		System.out.println("# alignements a calculer => (n*(n-1))*4 = "+(n*(n-1))*4);
 		System.out.println("# alignements calcules : "+graph.getArcs().size());
 		System.out.println("# alignements manquants  : " +(((n*(n-1))*4)- graph.getArcs().size() ));
-		for(Arc c : graph.getArcs()){
+		/*for(Arc c : graph.getArcs()){
 			//if(c.getSource()==0)
 			//System.out.println(c.getSource()+1+"(complementaire: "+c.getSrcC()+") --> "+(c.getDestination()+1)+"(complementaire: "+c.getDstC()+") score: "+c.getScore());
-			System.out.println(c.getScore());
-		}
+			//System.out.println(c.getScore());
+		}*/
 		//System.out.println("S = "+graph.getSommet(0).getComplementaire()+ " "+graph.getSommet(0).getComplementaire().length());
 		//System.out.println("T = "+graph.getSommet(1).getFrag()+" "+graph.getSommet(1).getFrag().length());
 		//Fragment result = new Alignement().aligne(graph.getSommet(0).getComplementaire(),graph.getSommet(1).getFrag());

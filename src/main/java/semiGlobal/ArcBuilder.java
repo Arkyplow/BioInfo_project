@@ -16,7 +16,7 @@ public class ArcBuilder {
 		// alignement semi-global
 		Alignement al = new Alignement();
 		// # de cors sur la machine
-		int job = 2* Runtime.getRuntime().availableProcessors();
+		int job = 2*Runtime.getRuntime().availableProcessors();
 		// tableau de job thread
 		ComputeThread[] jobs = new ComputeThread[job];
 		Queue<Arc>[] topush = new LinkedList[job];
