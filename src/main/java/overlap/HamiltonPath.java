@@ -39,13 +39,43 @@ public class  HamiltonPath{
 				}
 			}
 			if(sets.size() == 1){
-				return result;
+				return order(graph, result);
 			}
 		}
-		return result;
+		return order(graph, result);
 		
 	}
 	
+	/**
+	 * Réordonne les arcs donnés pour en faire un chemin valide
+	 * @param graph Un overlap graph
+	 * @param result une liste d'arcs de graph
+	 */
+	private static ArrayList<Arc> order(Overlap graph, ArrayList<Arc> result) {
+		ArrayList<Arc> arcs = new ArrayList<Arc>();
+		for(int i = 0; i < result.size(); i++){
+			if(!graph.getSommet(result.get(i).getSource()).getLockIn(result.get(i).getSrcC())){
+				arcs.add(result.get(i));
+				result.remove(i);
+				break;
+			}
+		}
+		while(result.size() > 0){
+			boolean found = false;
+			int i = 0;
+			while(!found){
+				if(result.get(i).getSource() == arcs.get(arcs.size() - 1).getDestination() 
+						&& result.get(i).getSrcC() == arcs.get(arcs.size() - 1).getDstC()){
+					arcs.add(result.get(i));
+					result.remove(i);
+					found = true;
+				}
+				i++;
+			}
+		}
+		return arcs;
+	}
+
 	/**
 	 * Trouve l'ensemble qui contient l'indice donné
 	 * @param sets ensemble de tous les ensembles
