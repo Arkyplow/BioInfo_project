@@ -21,6 +21,7 @@ public class MainFrame {
      */
 	public static void main(String[] args) {
 		Overlap graph = Overlap.build("/home/nanabaskint/Git/BioInfo_project/test/test.fasta");
+		//Overlap graph = Overlap.build("/home/santorin/BioInfo_project/test/test.fasta");
 		Fragment T = new Fragment("ATCGGCATTCAGT");//.getComplementaire();//frags.get(0); //
 		Fragment G = new Fragment("ATTAGACCATGCGGC");//.getComplementaire();//frags.get(1); //
 		Alignement ali = new Alignement();
