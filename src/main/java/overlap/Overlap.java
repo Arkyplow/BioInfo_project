@@ -123,4 +123,26 @@ public class Overlap {
 		HeapSort.Sort(retour, true);
 		return retour;
 	}
+
+	/**
+	 * Calcule l alignement represente par un arc du graph
+	 * @param c l arc dont on veut recuperer l alignement
+	 * @return Un tableau de String de taille 2 ou le premier element represente G et le deuxieme element represente T, null si il y a eu un probleme
+	 */
+	public String[] computeAlignement(Arc c){
+		Fragment G ;
+		Fragment T ;
+		Alignement ali = new Alignement();
+		if(c.getSrcC())
+			G = getSommet(c.getSource()).getComplementaire();
+		else
+			G = getSommet(c.getSource()).getFrag();
+		if(c.getDstC())
+			T = getSommet(c.getDestination()).getComplementaire();
+		else
+			T = getSommet(c.getDestination()).getFrag();
+		if(!(G==null && T ==null))
+			return ali.aligne(G,T,c.getI(),c.getJ());
+		return null;
+	}
 }

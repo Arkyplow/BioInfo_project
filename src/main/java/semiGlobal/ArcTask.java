@@ -37,17 +37,17 @@ public class ArcTask {
 		int[] score;
 		for(int i = sommetIndex+1 ;i<graph.getSommets().size();i++){
 			score = al.getBestScores(graph.getSommet(sommetIndex).getFrag(), graph.getSommet(i).getFrag());
-			topush.add(new Arc(i, sommetIndex ,false, false, score[0]));
-			topush.add(new Arc(sommetIndex , i, false, false, score[1]));
+			topush.add(new Arc(i, sommetIndex ,false, false, score[0],score[2],score[3]));
+			topush.add(new Arc(sommetIndex , i, false, false, score[1],score[4],score[5]));
 			score = al.getBestScores(graph.getSommet(sommetIndex).getFrag(), graph.getSommet(i).getFrag().getComplementaire());
-			topush.add( new Arc(i, sommetIndex ,false, true, score[0]));
-			topush.add( new Arc(sommetIndex , i, true, false,score[1]));
+			topush.add( new Arc(i, sommetIndex ,false, true, score[0],score[2],score[3]));
+			topush.add( new Arc(sommetIndex , i, true, false,score[1],score[4],score[5]));
 			score = al.getBestScores(graph.getSommet(sommetIndex).getFrag().getComplementaire(), graph.getSommet(i).getFrag());
-			topush.add( new Arc(i, sommetIndex ,true, false, score[0]));
-			topush.add( new Arc(sommetIndex , i, false, true,score[1]));
+			topush.add( new Arc(i, sommetIndex ,true, false, score[0],score[2],score[3]));
+			topush.add( new Arc(sommetIndex , i, false, true,score[1],score[4],score[5]));
 			score = al.getBestScores(graph.getSommet(sommetIndex).getFrag().getComplementaire(), graph.getSommet(i).getFrag().getComplementaire());
-			topush.add( new Arc(i, sommetIndex ,true,true, score[0]));
-			topush.add( new Arc(sommetIndex , i, true,true ,score[1]));
+			topush.add( new Arc(i, sommetIndex ,true,true, score[0],score[2],score[3]));
+			topush.add( new Arc(sommetIndex , i, true,true ,score[1],score[4],score[5]));
 		}
 		upp();
 	}
