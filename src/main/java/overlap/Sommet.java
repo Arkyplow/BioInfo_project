@@ -56,9 +56,9 @@ public class Sommet {
 	 */
 	public void lockIn( boolean lockComplementaire ){
 		if(lockComplementaire) // on a choisi le fragment complementaire, on  verouille inC
-			inC=true;
+			inC = in = out = true;
 		else // on a choisi le fragment initial, on  verouille in
-			in = true;
+			in = inC = outC = true;
 	}
 
 	/**

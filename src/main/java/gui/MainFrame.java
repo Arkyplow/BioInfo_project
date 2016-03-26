@@ -1,5 +1,9 @@
 package gui;
 
+import java.util.ArrayList;
+
+import overlap.Arc;
+import overlap.HamiltonPath;
 import overlap.Overlap;
 
 import javax.swing.*;
@@ -42,7 +46,7 @@ public class MainFrame {
 
 		long debut = System.currentTimeMillis();
 		//Overlap graph = Overlap.build("/home/nanabaskint/Git/BioInfo_project/test/collection1.fasta");
-		Overlap graph = Overlap.build("/home/nanabaskint/Git/BioInfo_project/datas/Collections/10000/collection1.fasta");
+		Overlap graph = Overlap.build("/home/santorin/BioInfo_project/datas/Collections/10000/collection1.fasta");
 		System.out.println("Bio-Info");
 		System.out.println("temps calcule des alignements : "+(double)(System.currentTimeMillis()-debut)/1000+"s");
 		//Overlap graph = Overlap.build("/home/nanabaskint/Git/BioInfo_project/test/test.fasta");
@@ -61,6 +65,11 @@ public class MainFrame {
 		//Fragment result = new Alignement().aligne(graph.getSommet(0).getComplementaire(),graph.getSommet(1).getFrag());
 		//System.out.println("result : "+result +" "+result.length());
 		//initializeMain();
+		ArrayList<Arc> arcs = HamiltonPath.greedy(graph);
+		for(Arc arc : arcs){
+			System.out.print(arc.getSource() + " - " + arc.getDestination() + " - ");
+		}
+		System.out.println("\n" + arcs.size());
 	}
 
 	/**
