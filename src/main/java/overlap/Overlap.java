@@ -119,9 +119,12 @@ public class Overlap {
 		}catch (FileNotFoundException exception){
 			System.out.println ("Le fichier n'a pas été trouvé");
 		}
-		new ArcBuilder().build(retour);
-		HeapSort.Sort(retour, true);
+
 		return retour;
+	}
+	public void run(){
+		new ArcBuilder().build(this);
+		HeapSort.Sort(this, true);
 	}
 
 	/**
