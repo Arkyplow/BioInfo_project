@@ -1,7 +1,5 @@
 package semiGlobal;
 
-import java.util.ArrayList;
-
 /**
  * @author Jannou Brohee
  */
@@ -34,7 +32,7 @@ public class Alignement {
      * @param t symbole du Fragment T
      * @return le score d un paire de symboles
      */
-    public int getMatchScore(char s, char t){
+    public int getMatchScore(byte s, byte t){
         return s == t ? (int)getMatch() : (int)getMismatch();
     }
 
@@ -115,91 +113,30 @@ public class Alignement {
 		int[] retour = new int[]{0, 0, 0, 0, 0, 0};
 		int[][] matrice = matriceSim(G,T);
 		int tmpscore=0;
-		ArrayList<ArrayList<int[]>> indexs = new ArrayList();
-		indexs.add(new ArrayList<int[]>());
-		indexs.add(new ArrayList<int[]>());
+
 		//indexs.get(0) ==> paire de iG,jG dans G
 		//indexs.get(1) ==> paire de iG,jG dans T
 		int iG ,jG; // iG,jG ==> indice quand on commence par G
 		for(int j=1;j<=T.length();j++){
 			if(matrice[G.length()][j]>tmpscore){ // nouveau max en enlève ce qu'on avait jusqu'a present
 				tmpscore = matrice[G.length()][j];
-				indexs.get(0).clear();
-				indexs.get(0).add(new int[]{G.length(), j});
+				retour[0]=tmpscore;
+				retour[2]=G.length();
+				retour[3]=j;
 			}
-			else if(matrice[G.length()][j]>=tmpscore) // doublon ==> on ajoute
-				indexs.get(0).add(new int[]{G.length(), j});
 		}
 		tmpscore=0;
 		for(int i=1;i<=G.length();i++) {
 			if (matrice[i][T.length()] > tmpscore) {
 				tmpscore = matrice[i][T.length()];
-				indexs.get(1).clear();
-				indexs.get(1).add(new int[]{i, T.length()});
-			} else if (matrice[i][T.length()] >= tmpscore)
-				indexs.get(1).add(new int[]{i, T.length()});
-		}
-		//score pour G -> T
-		// voir tout les score possible et garder meilleur
-		for(int[] t : indexs.get(0)){
-			tmpscore =0;
-			iG =t[0];
-			jG =t[1];
-			while(jG !=0 && iG !=0){
-				if(matrice[iG][jG] == matrice[iG-1][jG]+getGap()){ // gap en s
-					iG--;
-					tmpscore+=(int)getGap();
-				}
-				else if(matrice[iG][jG] == matrice[iG][jG-1]+getGap()){ // gap en t
-					jG --;
-					tmpscore+=(int)getGap();
-				}
-				else if(matrice[iG][jG] == matrice[iG - 1][jG - 1] + getMatchScore(G.get(iG - 1), T.get(jG - 1))) {
-					if (G.get(iG - 1)== T.get(jG - 1))
-						tmpscore+=(int)getMatch();
-					else
-						tmpscore+=(int)getMismatch();
-					iG--;
-					jG--;
-				}
-			}
-			if(retour[0]<tmpscore){
-				retour[0] = tmpscore;
-				retour[2]=t[0];
-				retour[3]=t[1];
-			}
-		}
-		// score pour T -> G
-		for(int[] t : indexs.get(1)) {
-			tmpscore = 0;
-			jG=t[1];
-			iG=t[0];
-			while(jG !=0 && iG !=0){
-				if(matrice[iG][jG] == matrice[iG-1][jG]+getGap()){ // gap en s
-					iG--;
-					tmpscore+=(int)getGap();
-				}
-				else if(matrice[iG][jG] == matrice[iG][jG-1]+getGap()){ // gap en t
-					jG --;
-					tmpscore+=(int)getGap();
-				}
-				else if(matrice[iG][jG] == matrice[iG - 1][jG - 1] + getMatchScore(G.get(iG - 1), T.get(jG - 1))) {
-					if (G.get(iG - 1)== T.get(jG - 1))
-						tmpscore+=(int)getMatch();
-					else
-						tmpscore+=(int)getMismatch();
-					iG--;
-					jG--;
-				}
-			}
-			if(retour[1]<tmpscore){
-				retour[1] = tmpscore;
-				retour[4]=t[0];
-				retour[5]=t[1];
+				retour[1]=tmpscore;
+				retour[4]=i;
+				retour[5]=T.length();
 			}
 		}
 		return retour;
 	}
+
 	/**
 	 * Retourne un tableau de String de taille 2 representant l alignement de T sur G ou on maximise les gap a la fin de G et au debut de T.
 	 * Le premier element du tableau represente G et le deuxieme element represente T .

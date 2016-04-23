@@ -67,7 +67,6 @@ public class OpenFileWindow extends JFrame {
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			path = chooser.getSelectedFile().getAbsolutePath();
 			mFile.setText(path.substring(path.lastIndexOf("/")+1));
-			System.out.println(path);
 		}
 
 	}

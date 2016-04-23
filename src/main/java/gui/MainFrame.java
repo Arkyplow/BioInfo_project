@@ -23,16 +23,9 @@ public class MainFrame {
 	 * @param args parametre min fenetre principale
      */
 	public static void main(String[] args) {
-
 		initializeMain();
 
-
-		//Overlap graph = Overlap.build("/home/nanabaskint/Git/BioInfo_project/test/collection1.fasta");
-
-
-
-
-
+		//MainFrame.run2(run1());
 	}
 
 	/**
@@ -42,6 +35,7 @@ public class MainFrame {
 		final JFrame frame = new JFrame("BioInformatique");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(400,600);
+		frame.setResizable(false);
 		mainContentPane = new JPanel();
 		GridBagLayout gridbag = new GridBagLayout();
 		mainContentPane.setLayout(gridbag);
@@ -64,7 +58,6 @@ public class MainFrame {
 						MainFrame.run2(run1());
 					}
 				};
-				System.out.println(open != null);
 				if(open.getPath() != null)
 					t.start();
 				else {
@@ -100,14 +93,15 @@ public class MainFrame {
 		String logg = "\n";
 		Overlap graph;
 		graph = Overlap.build(open.getPath());
-		//Overlap graph = Overlap.build("/home/nanabaskint/Git/BioInfo_project/datas/Collections/10000/collection1.fasta");
+		//graph = Overlap.build("/home/nanabaskint/Git/BioInfo_project/datas/Collections/10000/collection1.fasta");
 		int  n = graph.getSommets().size();
+
 		logg+=" \n"+"> # fragments d'ADN  n = "+n;
 		logg+=" \n"+"> # alignements a calculer => (n*(n-1))*4 = "+(n*(n-1))*4;
 		logg+="\n> # alignements à prendre theorie : "+(n-1);
 		logg+="\n------------------------------------------------";
+		//System.out.println(logg);
 		log(logg);
-		logg = "";
 		return graph;
 	}
 
@@ -115,21 +109,28 @@ public class MainFrame {
 		int  n = graph.getSommets().size();
 		String logg = "";
 		long debut = System.currentTimeMillis();
+		long debut2 = System.currentTimeMillis();
 		graph.run();
-		ArrayList<Arc> arcs = HamiltonPath.greedy(graph);
-		//Overlap graph = Overlap.build("/home/santorin/BioInfo_project/datas/Collections/10000/collection1.fasta");
-
-		System.out.println("Bio-Info");
-
-		//Overlap graph = Overlap.build("/home/nanabaskint/Git/BioInfo_project/test/test.fasta");
-
-		log(logg);
-		logg+="\n Temps calcule des alignements & recherche chemin : "+(double)(System.currentTimeMillis()-debut)/1000+"s";
+		logg+="\n Temps calcule des alignements : "+(double)(System.currentTimeMillis()-debut)/1000+"s";
 		logg+="\n> # alignements manquants  : " +(((n*(n-1))*4)- graph.getArcs().size() );
-		for(Arc arc : arcs)
-			System.out.print(arc.getSource() + " - " );
-		System.out.println(arcs.get(arcs.size()-1).getDestination());
+		log(logg);
+		logg = "";
+		debut = System.currentTimeMillis();
+		graph.sort();
+		logg+="\n Temps calcul trie des alignements : "+(double)(System.currentTimeMillis()-debut)/1000+"s";
+		log(logg);
+		logg = "";
+		debut = System.currentTimeMillis();
+		ArrayList<Arc> arcs = HamiltonPath.greedy(graph);
+		logg+="\n Temps calcul chemin Hamiltonien  : "+(double)(System.currentTimeMillis()-debut)/1000+"s";
+		logg+="\n Temps total : "+(double)(System.currentTimeMillis()-debut2)/1000+"s";
+		log(logg);
+		logg = "";
+		//for(Arc arc : arcs)
+		//	System.out.print(arc.getSource() + " - " );
+		//System.out.println(arcs.get(arcs.size()-1).getDestination());
 		logg+="\n> # alignements selectionés : "+ arcs.size();
+		//System.out.println(logg);
 		log(logg);
 	}
 }
