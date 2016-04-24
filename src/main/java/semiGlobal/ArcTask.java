@@ -30,24 +30,30 @@ public class ArcTask {
 		thread=_thread;
 	}
 
-	/**
+	/*
 	 * Lancer la tache
 	 */
 	public void run(){
 		int[] score;
+		// pour chaque sommet dans le graph qui n'as pas encore calculer ses arc avec les autres ,  on calcule les arcs avec sommetIndex
 		for(int i = sommetIndex+1 ;i<graph.getSommets().size();i++){
+			//on part de nouveau et on va vers i
+
 			score = al.getBestScores(graph.getSommet(sommetIndex).getFrag(), graph.getSommet(i).getFrag());
-			topush.add(new Arc(i, sommetIndex ,false, false, score[0],score[2],score[3]));
-			topush.add(new Arc(sommetIndex , i, false, false, score[1],score[4],score[5]));
-			score = al.getBestScores(graph.getSommet(sommetIndex).getFrag(), graph.getSommet(i).getFrag().getComplementaire());
-			topush.add( new Arc(i, sommetIndex ,false, true, score[0],score[2],score[3]));
-			topush.add( new Arc(sommetIndex , i, true, false,score[1],score[4],score[5]));
-			score = al.getBestScores(graph.getSommet(sommetIndex).getFrag().getComplementaire(), graph.getSommet(i).getFrag());
-			topush.add( new Arc(i, sommetIndex ,true, false, score[0],score[2],score[3]));
-			topush.add( new Arc(sommetIndex , i, false, true,score[1],score[4],score[5]));
-			score = al.getBestScores(graph.getSommet(sommetIndex).getFrag().getComplementaire(), graph.getSommet(i).getFrag().getComplementaire());
-			topush.add( new Arc(i, sommetIndex ,true,true, score[0],score[2],score[3]));
-			topush.add( new Arc(sommetIndex , i, true,true ,score[1],score[4],score[5]));
+			topush.add(new Arc( sommetIndex , i,false, false, score[0]));
+			topush.add(new Arc(i, sommetIndex, false, false, score[1]));
+
+			score = al.getBestScores(graph.getSommet(sommetIndex).getFrag(), graph.getSommet(i).getComplementaire());
+			topush.add( new Arc(sommetIndex , i ,false, true, score[0]));
+			topush.add( new Arc(i, sommetIndex, true, false,score[1]));
+
+			score = al.getBestScores(graph.getSommet(sommetIndex).getComplementaire(), graph.getSommet(i).getFrag());
+			topush.add( new Arc(sommetIndex , i ,true, false, score[0]));
+			topush.add( new Arc(i, sommetIndex, false, true,score[1]));
+
+			score = al.getBestScores(graph.getSommet(sommetIndex).getComplementaire(), graph.getSommet(i).getComplementaire());
+			topush.add( new Arc(sommetIndex , i ,true,true, score[0]));
+			topush.add( new Arc(i, sommetIndex, true,true ,score[1]));
 		}
 		upp();
 	}

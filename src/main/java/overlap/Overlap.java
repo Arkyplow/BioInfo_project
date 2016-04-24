@@ -3,6 +3,7 @@ package overlap;
 import semiGlobal.Alignement;
 import semiGlobal.ArcBuilder;
 import semiGlobal.Fragment;
+import utils.String2Byte;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -99,7 +100,7 @@ public class Overlap {
 				while (line != null){
 					if(!line.isEmpty()){
 						if(line.contains(">") && !buff.isEmpty()){
-							retour.addSommet(new Sommet(new Fragment(convert(buff))));
+							retour.addSommet(new Sommet(new Fragment(String2Byte.encode(buff))));
 							buff = "";
 						}
 						else if(!line.contains(">"))
@@ -107,7 +108,7 @@ public class Overlap {
 					}
 					line = br.readLine();
 				}
-				retour.addSommet(new Sommet(new Fragment(convert(buff))));
+				retour.addSommet(new Sommet(new Fragment(String2Byte.encode(buff))));
 
 				br.close();
 				fr.close();
@@ -147,44 +148,8 @@ public class Overlap {
 		else
 			T = getSommet(c.getDestination()).getFrag();
 		if(!(G==null && T ==null))
-			return ali.aligne(G,T,c.getI(),c.getJ());
+			return ali.aligne(G,T);
 		return null;
 	}
 
-	private static byte[] convert(String input){
-		char[] work = input.toCharArray();
-		byte[] btab = new byte[work.length];
-		for (int i = 0;i<work.length;i++){
-			switch(work[i]){
-				case 'A':
-					btab[i]= (byte)0;
-					break;
-				case 'T':
-					btab[i]= (byte)3;
-					break;
-				case 'C':
-					btab[i]= (byte)1;
-					break;
-				case 'G':
-					btab[i]= (byte)2;
-					break;
-				case 'a':
-					btab[i] = (byte)0;
-					break;
-				case 't':
-					btab[i] = (byte)3;
-					break;
-				case 'c':
-					btab[i]= (byte)1;
-					break;
-				case 'g':
-					btab[i]= (byte)2;
-					break;
-				default:
-					btab[i] = (byte)4;
-					break;
-			}
-		}
-		return btab;
-	}
 }

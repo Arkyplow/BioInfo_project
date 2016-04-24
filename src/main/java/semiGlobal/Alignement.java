@@ -1,5 +1,9 @@
 package semiGlobal;
 
+import utils.String2Byte;
+
+import java.util.ArrayList;
+
 /**
  * @author Jannou Brohee
  */
@@ -104,54 +108,51 @@ public class Alignement {
 
 	/**
 	 * Calcule le score d un alignement
-	 * Dans le cas ou il y a plusieurs alignement optimaux on calcule le score de chacun d entre eux et on retourne le meilleur
+
 	 * @param G le Fragment G
 	 * @param T le Fragment T
-	 * @return le meilleur score ainsi que les indice dans la matric ou il faut commencer pour construire l alignement
+	 * @return le meilleur score ainsi que les indice dans la matrice ou il faut commencer pour construire l alignement
 	 */
 	public int[] getBestScores(Fragment G , Fragment T){
-		int[] retour = new int[]{0, 0, 0, 0, 0, 0};
+		int[] retour = new int[]{0, 0};
 		int[][] matrice = matriceSim(G,T);
-		int tmpscore=0;
+		int tmpscore=Integer.MIN_VALUE;
 
 		//indexs.get(0) ==> paire de iG,jG dans G
 		//indexs.get(1) ==> paire de iG,jG dans T
-		int iG ,jG; // iG,jG ==> indice quand on commence par G
+		// iG,jG ==> indice quand on commence par G
 		for(int j=1;j<=T.length();j++){
-			if(matrice[G.length()][j]>tmpscore){ // nouveau max en enlève ce qu'on avait jusqu'a present
+			if(matrice[G.length()][j]>=tmpscore){ // nouveau max en enlève ce qu'on avait jusqu'a present
 				tmpscore = matrice[G.length()][j];
 				retour[0]=tmpscore;
-				retour[2]=G.length();
-				retour[3]=j;
 			}
 		}
-		tmpscore=0;
+		tmpscore=Integer.MIN_VALUE;
 		for(int i=1;i<=G.length();i++) {
-			if (matrice[i][T.length()] > tmpscore) {
+			if (matrice[i][T.length()] >= tmpscore) {
 				tmpscore = matrice[i][T.length()];
 				retour[1]=tmpscore;
-				retour[4]=i;
-				retour[5]=T.length();
 			}
 		}
 		return retour;
 	}
-
 	/**
 	 * Retourne un tableau de String de taille 2 representant l alignement de T sur G ou on maximise les gap a la fin de G et au debut de T.
 	 * Le premier element du tableau represente G et le deuxieme element represente T .
-	 * @param G Le fragment ou on maximise les gap a la fin
-	 * @param T Le fragment ou on maximise les gap au debut
+	 * @param G Le fragment qui commece l'alignement
+	 * @param T Le fragment qui est aligne
+	 *
 	 * @return Un tableau de String de taille 2 ou le premier element represente G et le deuxieme element represente T .
 	 */
-	public String[] aligne( Fragment G, Fragment T,int _iG,int _jG){
-		String retour[] = new String[2];
-		retour[0] = retour[1] = "";
+	public String[] aligne( Fragment G, Fragment T){
+		ArrayList<Byte> ter1 = new ArrayList<Byte>();
+		ArrayList<Byte> ter2 = new ArrayList<Byte>();
+
 		int[][] matrice = matriceSim(G,T);
-		int tmpscore=-1;
+		int tmpscore=Integer.MIN_VALUE;
 		int iG = 0,jG = 0;
 		for(int j=1;j<=T.length();j++){
-			if(matrice[G.length()][j]>tmpscore){
+			if(matrice[G.length()][j]>=tmpscore){
 				tmpscore = matrice[G.length()][j];
 				iG=G.length();
 				jG=j;
@@ -161,24 +162,26 @@ public class Alignement {
 		// on cherche donc a construire le deuxieme fragment qui a ete modifier pour s aligner
 		// ==> on a donc T.lenght - jG gap a mettre pour G
 		//==> on doit recuperer les T.lenght - jG dernier element de T
-		for(int i = 0; i<(T.length()-jG);i++ )
-			retour[0] += "_";
-		retour[1] = T.substring(jG); // O(1)
+
+		for(int i = 0; i<(T.length()-jG);i++ ) {
+			ter1.add(0, (byte) 4);
+			ter2.add(0,T.get((T.length()-i)-1));
+		}
 		// on construit les alignement
 		while(jG !=0 && iG !=0){
 			if(matrice[iG][jG] == matrice[iG-1][jG]+getGap()){ // gap en G + recuperer une base dans T
-				retour[0] = G.get(iG-1) + retour[0];
-				retour[1] = "_"+retour[1];
+				ter1.add(0, G.get(iG-1));
+				ter2.add(0,(byte)4);
 				iG--;
 			}
 			else if(matrice[iG][jG] == matrice[iG][jG-1]+getGap()){ // gap en T + recuperer une base dans G
-				retour[0] = "_"+retour[0];
-				retour[1] = T.get(jG) + retour[1];
+				ter1.add(0, (byte) 4);
+				ter2.add(0,T.get(jG-1));
 				jG --;
 			}
 			else if(matrice[iG][jG] == matrice[iG - 1][jG - 1] + getMatchScore(G.get(iG - 1), T.get(jG - 1))) { //on copie un base de G et une base de T
-				retour[1] = T.get(jG-1) + retour[1];
-				retour[0] = G.get(iG-1) + retour[0];
+				ter1.add(0, G.get(iG-1));
+				ter2.add(0,T.get(jG-1));
 				iG--;
 				jG--;
 			}
@@ -186,18 +189,34 @@ public class Alignement {
 		// 2 cas possible,
 		if(iG!=0){ // il reste des base dans G mais pas dans T ==> rajouter des gap dans T (chevauchement )
 			while(iG>0){
-				retour[0] = G.get(iG-1) + retour[0];
-				retour[1] = "_"+retour[1];
+				ter1.add(0, G.get(iG-1));
+				ter2.add(0,(byte)4);
 				iG--;
 			}
 		}
 		if(jG!=0){ // il reste des base dans T mais pas dans G ==> rajouter des gap dans G (G est "inclus" dans T )
 			while (jG > 0) {
-				retour[0] = "_" +retour[0];
-				retour[1] = T.get(jG-1) + retour[1];
+				ter1.add(0, (byte) 4);
+				ter2.add(0,T.get(jG-1));
 				jG--;
 			}
 		}
+		Byte[] ter1a = new Byte[ter1.size()];
+		ter1.toArray(ter1a);
+
+		byte[] cast = new byte[ter1.size()];
+		for(int i = 0;i<cast.length;i++){
+			cast[i]=ter1a[i];
+		}
+		Byte[] ter2a = new Byte[ter2.size()];
+		ter2.toArray(ter2a);
+
+		byte[] cast2 = new byte[ter2.size()];
+		for(int i = 0;i<cast2.length;i++){
+			cast2[i]=ter2a[i];
+		}
+		String retour[]  ={String2Byte.decode(cast),String2Byte.decode(cast2)};
 		return retour;
 	}
+
 }

@@ -3,6 +3,7 @@ package gui;
 import overlap.Arc;
 import overlap.HamiltonPath;
 import overlap.Overlap;
+import semiGlobal.Alignement;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,10 +25,174 @@ public class MainFrame {
      */
 	public static void main(String[] args) {
 		initializeMain();
-
+		//test();
 		//MainFrame.run2(run1());
 	}
+	public static void test(){
+		//Overlap graph = Overlap.build("/home/santorin/BioInfo_project/test/test2.fasta");
+		Overlap graph = Overlap.build("/home/nanabaskint/Git/BioInfo_project/datas/Collections/10000/collection1.fasta");
+		graph.run();
+		graph.sort();
+		ArrayList<Arc> arcs = HamiltonPath.greedy(graph);
 
+		//Fragment T = graph.getSommet(0).getFrag();//new Fragment("ATCGGCATTCAGT");//.getComplementaire();//frags.get(0); //
+		//Fragment G = graph.getSommet(1).getFrag();//new Fragment("ATTAGACCATGCGGC");//.getComplementaire();//frags.get(1); //
+		Alignement ali = new Alignement();
+		//System.out.println(arc.getSource() + " - " + arc.getDestination());
+
+		for(Arc arc : arcs) {
+			//Arc arc = arcs.get(0);
+			System.out.println(arc.getSource() + " is compl : " + arc.getSrcC() + " --> " + arc.getDestination() + " is compl : " + arc.getDstC() + " score: " + arc.getScore());
+			String[] pr = graph.computeAlignement(arc);
+			System.out.println(pr[0]+"\n"+pr[1]);
+			/*if(arc.getSrcC()){
+				if(arc.getDstC()){
+					String[] al = ali.aligne(graph.getSommet(arc.getSource()).getComplementaire(),graph.getSommet(arc.getDestination()).getComplementaire());
+					System.out.println(al[0]+"\n"+al[1]);
+				}
+				else {
+					String[] al = ali.aligne(graph.getSommet(arc.getSource()).getComplementaire(),graph.getSommet(arc.getDestination()).getFrag());
+					System.out.println(al[0]+"\n"+al[1]);
+				}
+			}
+			else{
+				if(arc.getDstC()){
+					String[] al = ali.aligne(graph.getSommet(arc.getSource()).getFrag(),graph.getSommet(arc.getDestination()).getComplementaire());
+					System.out.println(al[0]+"\n"+al[1]);
+				}
+				else {
+					String[] al = ali.aligne(graph.getSommet(arc.getSource()).getFrag(),graph.getSommet(arc.getDestination()).getFrag());
+					System.out.println(al[0]+"\n"+al[1]);
+				}
+			}*/
+
+
+		}//System.out.println(arcs.get(arcs.size()-1).getDestination());
+
+		/*int[] blabla = ali.getBestScores(T.getComplementaire(),G);
+		System.out.println("score : "+blabla[0]+" i :"+blabla[1]+" j :"+blabla[2]);
+		System.out.println("score : "+blabla[1]+" i :"+blabla[4]+" j :"+blabla[5]);
+		int[][] test = ali.matriceSim(G,T);
+		System.out.println("matrice init - init ");
+		for(int k =0; k<=G.length();k++){
+			for(int j =0;j<=T.length();j++){
+				if(k==0 && j!=0)
+					System.out.print(T.get(j-1)+" , ");
+				else if(k!=0 && j==0)
+					System.out.print(G.get(k-1)+" , ");
+				else
+					System.out.print(test[k][j]+" , ");
+			}
+			System.out.print("\n");
+		}
+		for(Arc c : graph.getArcs()){
+			if((graph.getSommet(c.getSource()).getFrag().toString().equals(G.toString()) && !c.getSrcC()) && (graph.getSommet(c.getDestination()).getFrag().toString().equals(T.toString()) &&! c.getDstC()))
+				System.out.println(c.getSource()+1+"(complementaire: "+c.getSrcC()+") --> "+(c.getDestination()+1)+"(complementaire: "+c.getDstC()+") score: "+c.getScore()+" i = "+c.getI()+" j = "+c.getJ());
+			if((graph.getSommet(c.getSource()).getFrag().toString().equals(T.toString()) &&! c.getSrcC()) && (graph.getSommet(c.getDestination()).getFrag().toString().equals(G.toString()) && !c.getDstC()))
+				System.out.println(c.getSource()+1+"(complementaire: "+c.getSrcC()+") --> "+(c.getDestination()+1)+"(complementaire: "+c.getDstC()+") score: "+c.getScore()+" i = "+c.getI()+" j = "+c.getJ());
+		}
+		System.out.println();
+		int[][] test2 = ali.matriceSim(G,T.getComplementaire());
+		System.out.println("matrice init - compl ");
+		for(int k =0; k<=G.length();k++){
+			for(int j =0;j<=T.length();j++){
+				if(k==0 && j!=0)
+					System.out.print(T.getComplementaire().get(j-1)+" , ");
+				else if(k!=0 && j==0)
+					System.out.print(G.get(k-1)+" , ");
+				else
+					System.out.print(test2[k][j]+" , ");
+			}
+			System.out.print("\n");
+		}
+		for(Arc c : graph.getArcs()){
+			if((graph.getSommet(c.getSource()).getFrag().toString().equals(G.toString()) && !c.getSrcC()) && (graph.getSommet(c.getDestination()).getFrag().toString().equals(T.toString()) && c.getDstC()))
+				System.out.println(c.getSource()+1+"(complementaire: "+c.getSrcC()+") --> "+(c.getDestination()+1)+"(complementaire: "+c.getDstC()+") score: "+c.getScore()+" i = "+c.getI()+" j = "+c.getJ());
+			if((graph.getSommet(c.getSource()).getFrag().toString().equals(T.toString()) && c.getSrcC()) && (graph.getSommet(c.getDestination()).getFrag().toString().equals(G.toString()) && !c.getDstC()))
+				System.out.println(c.getSource()+1+"(complementaire: "+c.getSrcC()+") --> "+(c.getDestination()+1)+"(complementaire: "+c.getDstC()+") score: "+c.getScore()+" i = "+c.getI()+" j = "+c.getJ());
+		}
+		String[] al = ali.aligne(graph.getSommet(1).getFrag(),graph.getSommet(0).getComplementaire(),5,3);
+		System.out.println(al[0]+"\n"+al[1]);
+		al = ali.aligne(graph.getSommet(1).getFrag(),graph.getSommet(0).getComplementaire(),5,4);
+		System.out.println(al[0]+"\n"+al[1]);
+
+
+
+		int[][] test3 = ali.matriceSim(G.getComplementaire(),T);
+		System.out.println("matrice compl - init ");
+		for(int k =0; k<=G.length();k++){
+			for(int j =0;j<=T.length();j++){
+				if(k==0 && j!=0)
+					System.out.print(T.get(j-1)+" , ");
+				else if(k!=0 && j==0)
+					System.out.print(G.getComplementaire().get(k-1)+" , ");
+				else
+					System.out.print(test3[k][j]+" , ");
+			}
+			System.out.print("\n");
+		}
+		for(Arc c : graph.getArcs()){
+			if((graph.getSommet(c.getSource()).getFrag().toString().equals(G.toString()) && c.getSrcC()) && (graph.getSommet(c.getDestination()).getFrag().toString().equals(T.toString()) && !c.getDstC()))
+				System.out.println(c.getSource()+1+"(complementaire: "+c.getSrcC()+") --> "+(c.getDestination()+1)+"(complementaire: "+c.getDstC()+") score: "+c.getScore()+" i = "+c.getI()+" j = "+c.getJ());
+			if((graph.getSommet(c.getSource()).getFrag().toString().equals(T.toString()) && !c.getSrcC()) && (graph.getSommet(c.getDestination()).getFrag().toString().equals(G.toString()) && c.getDstC()))
+				System.out.println(c.getSource()+1+"(complementaire: "+c.getSrcC()+") --> "+(c.getDestination()+1)+"(complementaire: "+c.getDstC()+") score: "+c.getScore()+" i = "+c.getI()+" j = "+c.getJ());
+		}
+		int[][] test4 = ali.matriceSim(G.getComplementaire(),T.getComplementaire());
+		System.out.println("matrice compl - compl ");
+		for(int k =0; k<=G.length();k++){
+			for(int j =0;j<=T.length();j++){
+				if(k==0 && j!=0)
+					System.out.print(T.getComplementaire().get(j-1)+" , ");
+				else if(k!=0 && j==0)
+					System.out.print(G.getComplementaire().get(k-1)+" , ");
+				else
+					System.out.print(test4[k][j]+" , ");
+			}
+			System.out.print("\n");
+		}
+		for(Arc c : graph.getArcs()){
+			if((graph.getSommet(c.getSource()).getFrag().toString().equals(G.toString()) && c.getSrcC()) && (graph.getSommet(c.getDestination()).getFrag().toString().equals(T.toString()) && c.getDstC()))
+				System.out.println(c.getSource()+1+"(complementaire: "+c.getSrcC()+") --> "+(c.getDestination()+1)+"(complementaire: "+c.getDstC()+") score: "+c.getScore()+" i = "+c.getI()+" j = "+c.getJ());
+			if((graph.getSommet(c.getSource()).getFrag().toString().equals(T.toString()) && c.getSrcC()) && (graph.getSommet(c.getDestination()).getFrag().toString().equals(G.toString()) && c.getDstC()))
+				System.out.println(c.getSource()+1+"(complementaire: "+c.getSrcC()+") --> "+(c.getDestination()+1)+"(complementaire: "+c.getDstC()+") score: "+c.getScore()+" i = "+c.getI()+" j = "+c.getJ());
+		}
+		System.out.print("\n");
+		System.out.print("\n");
+		System.out.print("\n");
+
+		for(Arc c : graph.getArcs()){
+			System.out.println(c.getSource()+1+"(complementaire: "+c.getSrcC()+") --> "+(c.getDestination()+1)+"(complementaire: "+c.getDstC()+") score: "+c.getScore());
+		}
+		/*int i =0;
+		int j=0;
+		int[] al = new Alignement().getBestScore(test,G,T);
+		int[] sco = ali.getBestScores(G,T);
+		System.out.println("what0 "+sco[0]);
+		System.out.println("what1 "+sco[1]);
+		System.out.println("==> best equals "+test[al[0]][al[1]]+ " at i="+al[0]+" & j="+al[1]);
+		System.out.println("G = "+G+ " "+G.length());
+		System.out.println("T = "+T+" "+T.length());
+		System.out.println("\nAlignement de T sur G");
+		String result[] = ali.aligne(G,T);
+		System.out.println("G result : "+result[0] +" "+result[0].length());
+		System.out.println("T result : "+result[1] +" "+result[1].length());
+		System.out.println("\nAlignement de G sur T");
+		result = ali.aligne(T,G);
+		System.out.println("T result : "+result[0] +" "+result[1].length());
+		System.out.println("G result : "+result[1] +" "+result[0].length());*/
+
+		//Overlap graph = Overlap.build("/home/nanabaskint/Git/BioInfo_project/test/collection1.fasta");
+
+
+
+
+		//Overlap graph = Overlap.build("/home/santorin/BioInfo_project/datas/Collections/10000/collection1.fasta");
+		//System.out.println("Bio-Info");
+		//Overlap graph = Overlap.build("/home/nanabaskint/Git/BioInfo_project/test/test.fasta");
+
+
+
+	}
 	/**
 	 * initialisation fenetre principale
 	 */

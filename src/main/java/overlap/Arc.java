@@ -8,8 +8,6 @@ public class Arc {
     private int indexSommetSrc;
     private int indexSommetDst;
     private int score;
-	private int i;
-	private int j;
     private boolean srcC= false;
     private boolean dstC = false;
 
@@ -21,14 +19,12 @@ public class Arc {
 	 * @param _dstC true si on prends le complementaire de la source
 	 * @param _score le score de l alignement
 	 */
-    public Arc(int _indexSommetSrc, int _indexSommetDst, boolean _srcC, boolean _dstC, int _score,int _i,int _j){
+    public Arc(int _indexSommetSrc, int _indexSommetDst, boolean _srcC, boolean _dstC, int _score){
         indexSommetSrc = _indexSommetSrc;
         indexSommetDst = _indexSommetDst;
         srcC = _srcC;
         dstC = _dstC;
         score = _score;
-		i=_i;
-		j=_j;
     }
 
 	/**
@@ -78,10 +74,5 @@ public class Arc {
 	public int getScore(){
 		return score;
 	}
-	public int getI(){
-		return i;
-	}
-	public int getJ(){
-		return j;
-	}
+
 }

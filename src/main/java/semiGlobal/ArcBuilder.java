@@ -28,6 +28,7 @@ public class ArcBuilder {
 			topush[i]=new LinkedList<Arc>();
 		}
 		//assigner les taches aux threads
+		//pr chaque sommet dans le graph,
 		for(int i = 0; i<graph.getSommets().size();i++){
 			jobs[count%job].add(new ArcTask(i,graph,al,jobs[count%job],topush[count%job]));
 			count+=1;
