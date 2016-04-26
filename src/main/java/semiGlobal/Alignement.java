@@ -144,7 +144,7 @@ public class Alignement {
 	 *
 	 * @return Un tableau de String de taille 2 ou le premier element represente G et le deuxieme element represente T .
 	 */
-	public String[] aligne( Fragment G, Fragment T){
+	public Fragment[] aligne( Fragment G, Fragment T){
 		ArrayList<Byte> ter1 = new ArrayList<Byte>();
 		ArrayList<Byte> ter2 = new ArrayList<Byte>();
 
@@ -215,7 +215,7 @@ public class Alignement {
 		for(int i = 0;i<cast2.length;i++){
 			cast2[i]=ter2a[i];
 		}
-		String retour[]  ={String2Byte.decode(cast),String2Byte.decode(cast2)};
+		Fragment retour[]  ={new Fragment(cast),new Fragment(cast2)};
 		return retour;
 	}
 

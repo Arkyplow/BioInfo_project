@@ -4,11 +4,19 @@ import overlap.Arc;
 import overlap.HamiltonPath;
 import overlap.Overlap;
 import semiGlobal.Alignement;
+import semiGlobal.Fragment;
 
 import javax.swing.*;
+
+import consensus.Consensus;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 /**
  * fenetre principale
@@ -43,7 +51,7 @@ public class MainFrame {
 		for(Arc arc : arcs) {
 			//Arc arc = arcs.get(0);
 			System.out.println(arc.getSource() + " is compl : " + arc.getSrcC() + " --> " + arc.getDestination() + " is compl : " + arc.getDstC() + " score: " + arc.getScore());
-			String[] pr = graph.computeAlignement(arc);
+			Fragment[] pr = graph.computeAlignement(arc);
 			System.out.println(pr[0]+"\n"+pr[1]);
 			/*if(arc.getSrcC()){
 				if(arc.getDstC()){
@@ -297,5 +305,31 @@ public class MainFrame {
 		logg+="\n> # alignements selectionés : "+ arcs.size();
 		//System.out.println(logg);
 		log(logg);
+		String cons = Consensus.consensus(graph, arcs);
+		System.out.println(cons.length());
+		File file = new File("/home/santorin/TestBio/consensus.fasta");
+		int f = 0;
+		try {
+			file.getParentFile().mkdirs();
+			file.createNewFile();
+			PrintWriter pw = new PrintWriter(new FileWriter(file));
+			pw.println("> Groupe-X Collection 1 Longueur " + cons.length());
+			for(int i = 0; i < cons.length(); i++){
+				if( i % 79 == 78){
+					pw.print("\n");
+				}
+				if(cons.charAt(i) == 'x'){
+					f++;
+				}
+				pw.print(cons.charAt(i));
+			}
+			pw.flush();
+			pw.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(f);
+		
 	}
 }

@@ -6,7 +6,10 @@ package semiGlobal;
  */
 public class Fragment {
 	private static final char GAP = ' ';
-	private final byte[] frag;
+	private byte[] frag;
+	private boolean isInShortForm = false;
+	private int leadingGap = 0;
+	private int trailingGap = 0;
 
 	/**
 	 * Constructeur d'un fragment
@@ -80,6 +83,45 @@ public class Fragment {
 		}
 		return new Fragment(ret);
 	}
+	
+	public void setInShortForm(){
+		isInShortForm = true;
+		int i = 0;
+		int j = frag.length - 1;
+		while(i < frag.length && frag[i] == 4){
+			i++;
+		}
+		while(j >= 0 && frag[j] == 4){
+			j--;
+		}
+		leadingGap = i;
+		trailingGap = frag.length - 1 - j;
+		byte[] newFrag = new byte[j - i + 1];
+		for(int k = 0; k < newFrag.length; k++){
+			newFrag[k] = frag[i + k];
+		}
+		frag = newFrag;
+	}
+	
+	public void insertGap(int i){
+		if(i <= leadingGap && isInShortForm){
+			leadingGap++;
+		}else if(i >= frag.length  - trailingGap && isInShortForm){
+			trailingGap++;
+		}else{
+			byte[] newFrag = new byte[frag.length + 1];
+			for(int j = 0; j < newFrag.length; j++){
+				if(i == j){
+					newFrag[j] = 4;
+				}else if(j < i){
+					newFrag[j] = frag[j];
+				}else{
+					newFrag[j] = frag[j-1];
+				}
+			}
+			frag = newFrag;
+		}
+	}
 
 	/**
 	 * Permet de  recuperer la partie du fragment commencant a l indice i
@@ -89,7 +131,7 @@ public class Fragment {
 	public String substring(int i){
 		String ret ="";
 		for (int _i = i;_i<frag.length;_i++){
-			switch(frag[i]){
+			switch(frag[_i]){
 				case 0:
 					ret+= "a";
 					break;
@@ -136,5 +178,9 @@ public class Fragment {
 			}
 		}
 		return ret;
+	}
+
+	public int getLeadingGap() {
+		return leadingGap;
 	}
 }
