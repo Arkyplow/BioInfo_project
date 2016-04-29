@@ -4,11 +4,19 @@ import overlap.Arc;
 import overlap.HamiltonPath;
 import overlap.Overlap;
 import semiGlobal.Alignement;
+import semiGlobal.Fragment;
 
 import javax.swing.*;
+
+import consensus.Consensus;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 /**
  * fenetre principale
@@ -43,7 +51,7 @@ public class MainFrame {
 		for(Arc arc : arcs) {
 			//Arc arc = arcs.get(0);
 			System.out.println(arc.getSource() + " is compl : " + arc.getSrcC() + " --> " + arc.getDestination() + " is compl : " + arc.getDstC() + " score: " + arc.getScore());
-			String[] pr = graph.computeAlignement(arc);
+			Fragment[] pr = graph.computeAlignement(arc);
 			System.out.println(pr[0]+"\n"+pr[1]);
 			/*if(arc.getSrcC()){
 				if(arc.getDstC()){
@@ -297,5 +305,17 @@ public class MainFrame {
 		logg+="\n> # alignements selectionés : "+ arcs.size();
 		//System.out.println(logg);
 		log(logg);
+		
+		//on crée un objet consensus
+		Consensus c = new Consensus(graph, arcs);
+		//voila le résultat
+		String cons = c.consensus();
+		System.out.println(cons.length());
+		
+		/*
+		 * on a aussi une méthode pour formater le résultat dans un fichier
+		 * c.printConsensusInFile(file);
+		 */
+		
 	}
 }

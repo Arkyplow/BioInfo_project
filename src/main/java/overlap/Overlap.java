@@ -135,7 +135,7 @@ public class Overlap {
 	 * @param c l arc dont on veut recuperer l alignement
 	 * @return Un tableau de String de taille 2 ou le premier element represente G et le deuxieme element represente T, null si il y a eu un probleme
 	 */
-	public String[] computeAlignement(Arc c){
+	public Fragment[] computeAlignement(Arc c){
 		Fragment G ;
 		Fragment T ;
 		Alignement ali = new Alignement();
