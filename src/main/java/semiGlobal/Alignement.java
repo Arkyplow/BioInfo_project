@@ -137,7 +137,7 @@ public class Alignement {
 		return retour;
 	}
 	/**
-	 * Retourne un tableau de String de taille 2 representant l alignement de T sur G ou on maximise les gap a la fin de G et au debut de T.
+	 * Retourne un tableau de Fragment de taille 2 representant l alignement de T sur G ou on maximise les gap a la fin de G et au debut de T.
 	 * Le premier element du tableau represente G et le deuxieme element represente T .
 	 * @param G Le fragment qui commece l'alignement
 	 * @param T Le fragment qui est aligne

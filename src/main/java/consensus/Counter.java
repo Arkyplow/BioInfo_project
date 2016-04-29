@@ -2,6 +2,13 @@ package consensus;
 
 import java.util.Random;
 
+/**
+ * Classe s'occupant du vote de majorité il s'agit simplement de
+ * compteur et au bout du compte on renvoie le maximum des compteur
+ * ou aléatoirement parmis les comteurs maximums
+ * @author santorin
+ *
+ */
 public class Counter {
 	
 	private static Random rand = new Random();
@@ -11,6 +18,9 @@ public class Counter {
 	private int g;
 	private int t;
 	
+	/**
+	 * Constructeur d'un vote
+	 */
 	public Counter(){
 		a = 0;
 		c = 0;
@@ -18,6 +28,14 @@ public class Counter {
 		t = 0;
 	}
 	
+	/**
+	 * On ajoute un nucléotide au vote
+	 * @param nucl le nucléotide sous forme de byte avec
+	 * 				0 pour 'a'
+	 * 				1 pour 'c'
+	 * 				2 pour 'g'
+	 * 				3 pour 't'
+	 */
 	public void addNucl(byte nucl){
 		switch(nucl){
 		case 0:	a++;
@@ -31,10 +49,13 @@ public class Counter {
 		}
 	}
 	
+	/**
+	 * retourne le compteur ayant la plus grande valeur ou un compteur
+	 * aléatoire parmis ceux de plus grande valeur
+	 * 
+	 * @return le nucléotide choisi sous forme de char
+	 */
 	public char getMajority(){
-		if(a == 0 && c == 0 && g == 0 && t == 0){
-			return 'x';
-		}
 		if(a > Math.max(Math.max(c, g), t)){
 			return 'a';
 		}else if(c > Math.max(Math.max(a, g), t)){

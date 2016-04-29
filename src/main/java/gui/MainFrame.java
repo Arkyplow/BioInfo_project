@@ -305,31 +305,17 @@ public class MainFrame {
 		logg+="\n> # alignements selectionés : "+ arcs.size();
 		//System.out.println(logg);
 		log(logg);
-		String cons = Consensus.consensus(graph, arcs);
+		
+		//on crée un objet consensus
+		Consensus c = new Consensus(graph, arcs);
+		//voila le résultat
+		String cons = c.consensus();
 		System.out.println(cons.length());
-		File file = new File("/home/santorin/TestBio/consensus.fasta");
-		int f = 0;
-		try {
-			file.getParentFile().mkdirs();
-			file.createNewFile();
-			PrintWriter pw = new PrintWriter(new FileWriter(file));
-			pw.println("> Groupe-X Collection 1 Longueur " + cons.length());
-			for(int i = 0; i < cons.length(); i++){
-				if( i % 79 == 78){
-					pw.print("\n");
-				}
-				if(cons.charAt(i) == 'x'){
-					f++;
-				}
-				pw.print(cons.charAt(i));
-			}
-			pw.flush();
-			pw.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		System.out.println(f);
+		
+		/*
+		 * on a aussi une méthode pour formater le résultat dans un fichier
+		 * c.printConsensusInFile(file);
+		 */
 		
 	}
 }

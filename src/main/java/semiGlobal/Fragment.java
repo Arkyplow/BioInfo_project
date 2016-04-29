@@ -5,11 +5,7 @@ package semiGlobal;
  * @author Jannou Brohee
  */
 public class Fragment {
-	private static final char GAP = ' ';
 	private byte[] frag;
-	private boolean isInShortForm = false;
-	private int leadingGap = 0;
-	private int trailingGap = 0;
 
 	/**
 	 * Constructeur d'un fragment
@@ -25,25 +21,6 @@ public class Fragment {
 	 * @return Le caractère a l'indice i du fragment
 	 */
 	public byte get(int i) {
-		/*char ret= 0;
-		switch(frag[i]){
-			case 0:
-				ret = 'a';
-				break;
-			case 1:
-				ret = 'c';
-				break;
-			case 2:
-				ret = 'g';
-				break;
-			case 3:
-				ret = 't';
-				break;
-			case 4:
-				ret = '_';
-				break;
-		}
-		return ret;*/
 		return frag[i];
 	}
 
@@ -84,43 +61,24 @@ public class Fragment {
 		return new Fragment(ret);
 	}
 	
-	public void setInShortForm(){
-		isInShortForm = true;
-		int i = 0;
-		int j = frag.length - 1;
-		while(i < frag.length && frag[i] == 4){
-			i++;
-		}
-		while(j >= 0 && frag[j] == 4){
-			j--;
-		}
-		leadingGap = i;
-		trailingGap = frag.length - 1 - j;
-		byte[] newFrag = new byte[j - i + 1];
-		for(int k = 0; k < newFrag.length; k++){
-			newFrag[k] = frag[i + k];
+	/**
+	 * Permet d'insérer un gap à l'indice i du fragment 
+	 * en décalant le reste du fragment
+	 * 
+	 * @param i l'indice où insérer le gap
+	 */
+	public void insertGap(int i){
+		byte[] newFrag = new byte[frag.length + 1];
+		for(int j = 0; j < newFrag.length; j++){
+			if(i == j){
+				newFrag[j] = 4;
+			}else if(j < i){
+				newFrag[j] = frag[j];
+			}else{
+				newFrag[j] = frag[j-1];
+			}
 		}
 		frag = newFrag;
-	}
-	
-	public void insertGap(int i){
-		if(i <= leadingGap && isInShortForm){
-			leadingGap++;
-		}else if(i >= frag.length  - trailingGap && isInShortForm){
-			trailingGap++;
-		}else{
-			byte[] newFrag = new byte[frag.length + 1];
-			for(int j = 0; j < newFrag.length; j++){
-				if(i == j){
-					newFrag[j] = 4;
-				}else if(j < i){
-					newFrag[j] = frag[j];
-				}else{
-					newFrag[j] = frag[j-1];
-				}
-			}
-			frag = newFrag;
-		}
 	}
 
 	/**
@@ -178,9 +136,5 @@ public class Fragment {
 			}
 		}
 		return ret;
-	}
-
-	public int getLeadingGap() {
-		return leadingGap;
 	}
 }
