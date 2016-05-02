@@ -56,20 +56,24 @@ public class Counter {
 	 * @return le nucléotide choisi sous forme de char
 	 */
 	public char getMajority(){
-		if(a > Math.max(Math.max(c, g), t)){
-			return 'a';
-		}else if(c > Math.max(Math.max(a, g), t)){
-			return 'c';
-		}else if(g > Math.max(Math.max(c, a), t)){
-			return 'g';
-		}else if(t > Math.max(Math.max(c, g), a)){
-			return 't';
+		String chars = "";
+		if(a >= Math.max(Math.max(c, g), t)){
+			chars += 'a';
 		}
-		switch(rand.nextInt(4)){
-			case 0:	return 'a';
-			case 1:	return 'c';
-			case 2: return 'g';
-			case 3:	return 't';
+		if(c >= Math.max(Math.max(a, g), t)){
+			chars += 'c';
+		}
+		if(g >= Math.max(Math.max(c, a), t)){
+			chars += 'g';
+		}
+		if(t >= Math.max(Math.max(c, g), a)){
+			chars += 't';
+		}
+		if(chars.length() > 1){
+			return chars.charAt(rand.nextInt(chars.length()));
+		}
+		if(chars.length() == 1){
+			return chars.charAt(0);
 		}
 		return '_';
 		

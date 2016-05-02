@@ -290,6 +290,9 @@ public class MainFrame {
 		logg = "";
 		debut = System.currentTimeMillis();
 		graph.sort();
+		for(Arc c : graph.getArcs()){
+			System.out.println("score: "+c.getScore());
+		}
 		logg+="\n Temps calcul trie des alignements : "+(double)(System.currentTimeMillis()-debut)/1000+"s";
 		log(logg);
 		logg = "";
@@ -312,10 +315,10 @@ public class MainFrame {
 		String cons = c.consensus();
 		System.out.println(cons.length());
 		
-		/*
-		 * on a aussi une méthode pour formater le résultat dans un fichier
-		 * c.printConsensusInFile(file);
-		 */
+		
+		 // on a aussi une méthode pour formater le résultat dans un fichier
+		  c.printConsensusInFile(new File("/home/santorin/TestBio/testConsensus.fasta"));
+		 
 		
 	}
 }
