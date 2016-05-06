@@ -1,5 +1,6 @@
 package gui;
 
+import consensus.Consensus;
 import overlap.Arc;
 import overlap.HamiltonPath;
 import overlap.Overlap;
@@ -7,16 +8,10 @@ import semiGlobal.Alignement;
 import semiGlobal.Fragment;
 
 import javax.swing.*;
-
-import consensus.Consensus;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 /**
  * fenetre principale
@@ -32,19 +27,38 @@ public class MainFrame {
 	 * @param args parametre min fenetre principale
      */
 	public static void main(String[] args) {
-		initializeMain();
+		if(args.length==5) {
+			if( args[1].equals("--out") && args[3].equals("--out-ic")) {
+				for (int i = 0; i < args.length; i++) {
+					System.out.println(i + " " + args[i]);
+				}
+			}
+			else{
+				System.out.println("Verifiez que vous avez bien les \'--out\'  et \'--out-ic\' ");
+			}
+		}
+		else if(args.length==1) {
+			if( args[0].equals("-gui") )
+				initializeMain();
+		}
+		else{
+			System.out.println("Verifiez vos paramètres : FragmentAssembler.jar <fichier.fasta> --out <sortie.fasta> --out-ic <sortie-ic.fasta> \nPour lancer la version graphique : FragmentAssembler.jar -gui");
+		}
+
+		//initializeMain();
+
 		//test();
 		//MainFrame.run2(run1());
 	}
 	public static void test(){
 		//Overlap graph = Overlap.build("/home/santorin/BioInfo_project/test/test2.fasta");
-		Overlap graph = Overlap.build("/home/nanabaskint/Git/BioInfo_project/datas/Collections/10000/collection1.fasta");
+		Overlap graph = Overlap.build("/home/nanabaskint/Git/BioInfo_project/test/test.fasta");
 		graph.run();
 		graph.sort();
 		ArrayList<Arc> arcs = HamiltonPath.greedy(graph);
 
-		//Fragment T = graph.getSommet(0).getFrag();//new Fragment("ATCGGCATTCAGT");//.getComplementaire();//frags.get(0); //
-		//Fragment G = graph.getSommet(1).getFrag();//new Fragment("ATTAGACCATGCGGC");//.getComplementaire();//frags.get(1); //
+		Fragment T = graph.getSommet(0).getFrag();//new Fragment("ATCGGCATTCAGT");//.getComplementaire();//frags.get(0); //
+		Fragment G = graph.getSommet(1).getFrag();//new Fragment("ATTAGACCATGCGGC");//.getComplementaire();//frags.get(1); //
 		Alignement ali = new Alignement();
 		//System.out.println(arc.getSource() + " - " + arc.getDestination());
 
@@ -77,9 +91,9 @@ public class MainFrame {
 
 		}//System.out.println(arcs.get(arcs.size()-1).getDestination());
 
-		/*int[] blabla = ali.getBestScores(T.getComplementaire(),G);
-		System.out.println("score : "+blabla[0]+" i :"+blabla[1]+" j :"+blabla[2]);
-		System.out.println("score : "+blabla[1]+" i :"+blabla[4]+" j :"+blabla[5]);
+		int[] blabla = ali.getBestScores(T.getComplementaire(),G);
+//		System.out.println("score : "+blabla[0]+" i :"+blabla[1]+" j :"+blabla[2]);
+//		System.out.println("score : "+blabla[1]+" i :"+blabla[4]+" j :"+blabla[5]);
 		int[][] test = ali.matriceSim(G,T);
 		System.out.println("matrice init - init ");
 		for(int k =0; k<=G.length();k++){
@@ -95,9 +109,9 @@ public class MainFrame {
 		}
 		for(Arc c : graph.getArcs()){
 			if((graph.getSommet(c.getSource()).getFrag().toString().equals(G.toString()) && !c.getSrcC()) && (graph.getSommet(c.getDestination()).getFrag().toString().equals(T.toString()) &&! c.getDstC()))
-				System.out.println(c.getSource()+1+"(complementaire: "+c.getSrcC()+") --> "+(c.getDestination()+1)+"(complementaire: "+c.getDstC()+") score: "+c.getScore()+" i = "+c.getI()+" j = "+c.getJ());
+				System.out.println(c.getSource()+1+"(complementaire: "+c.getSrcC()+") --> "+(c.getDestination()+1)+"(complementaire: "+c.getDstC()+") score: "+c.getScore());
 			if((graph.getSommet(c.getSource()).getFrag().toString().equals(T.toString()) &&! c.getSrcC()) && (graph.getSommet(c.getDestination()).getFrag().toString().equals(G.toString()) && !c.getDstC()))
-				System.out.println(c.getSource()+1+"(complementaire: "+c.getSrcC()+") --> "+(c.getDestination()+1)+"(complementaire: "+c.getDstC()+") score: "+c.getScore()+" i = "+c.getI()+" j = "+c.getJ());
+				System.out.println(c.getSource()+1+"(complementaire: "+c.getSrcC()+") --> "+(c.getDestination()+1)+"(complementaire: "+c.getDstC()+") score: "+c.getScore());
 		}
 		System.out.println();
 		int[][] test2 = ali.matriceSim(G,T.getComplementaire());
@@ -115,13 +129,13 @@ public class MainFrame {
 		}
 		for(Arc c : graph.getArcs()){
 			if((graph.getSommet(c.getSource()).getFrag().toString().equals(G.toString()) && !c.getSrcC()) && (graph.getSommet(c.getDestination()).getFrag().toString().equals(T.toString()) && c.getDstC()))
-				System.out.println(c.getSource()+1+"(complementaire: "+c.getSrcC()+") --> "+(c.getDestination()+1)+"(complementaire: "+c.getDstC()+") score: "+c.getScore()+" i = "+c.getI()+" j = "+c.getJ());
+				System.out.println(c.getSource()+1+"(complementaire: "+c.getSrcC()+") --> "+(c.getDestination()+1)+"(complementaire: "+c.getDstC()+") score: "+c.getScore());
 			if((graph.getSommet(c.getSource()).getFrag().toString().equals(T.toString()) && c.getSrcC()) && (graph.getSommet(c.getDestination()).getFrag().toString().equals(G.toString()) && !c.getDstC()))
-				System.out.println(c.getSource()+1+"(complementaire: "+c.getSrcC()+") --> "+(c.getDestination()+1)+"(complementaire: "+c.getDstC()+") score: "+c.getScore()+" i = "+c.getI()+" j = "+c.getJ());
+				System.out.println(c.getSource()+1+"(complementaire: "+c.getSrcC()+") --> "+(c.getDestination()+1)+"(complementaire: "+c.getDstC()+") score: "+c.getScore());
 		}
-		String[] al = ali.aligne(graph.getSommet(1).getFrag(),graph.getSommet(0).getComplementaire(),5,3);
+		Fragment[] al = ali.aligne(graph.getSommet(1).getFrag(),graph.getSommet(0).getComplementaire());
 		System.out.println(al[0]+"\n"+al[1]);
-		al = ali.aligne(graph.getSommet(1).getFrag(),graph.getSommet(0).getComplementaire(),5,4);
+		al = ali.aligne(graph.getSommet(1).getFrag(),graph.getSommet(0).getComplementaire());
 		System.out.println(al[0]+"\n"+al[1]);
 
 
@@ -141,9 +155,9 @@ public class MainFrame {
 		}
 		for(Arc c : graph.getArcs()){
 			if((graph.getSommet(c.getSource()).getFrag().toString().equals(G.toString()) && c.getSrcC()) && (graph.getSommet(c.getDestination()).getFrag().toString().equals(T.toString()) && !c.getDstC()))
-				System.out.println(c.getSource()+1+"(complementaire: "+c.getSrcC()+") --> "+(c.getDestination()+1)+"(complementaire: "+c.getDstC()+") score: "+c.getScore()+" i = "+c.getI()+" j = "+c.getJ());
+				System.out.println(c.getSource()+1+"(complementaire: "+c.getSrcC()+") --> "+(c.getDestination()+1)+"(complementaire: "+c.getDstC()+") score: "+c.getScore());
 			if((graph.getSommet(c.getSource()).getFrag().toString().equals(T.toString()) && !c.getSrcC()) && (graph.getSommet(c.getDestination()).getFrag().toString().equals(G.toString()) && c.getDstC()))
-				System.out.println(c.getSource()+1+"(complementaire: "+c.getSrcC()+") --> "+(c.getDestination()+1)+"(complementaire: "+c.getDstC()+") score: "+c.getScore()+" i = "+c.getI()+" j = "+c.getJ());
+				System.out.println(c.getSource()+1+"(complementaire: "+c.getSrcC()+") --> "+(c.getDestination()+1)+"(complementaire: "+c.getDstC()+") score: "+c.getScore());
 		}
 		int[][] test4 = ali.matriceSim(G.getComplementaire(),T.getComplementaire());
 		System.out.println("matrice compl - compl ");
@@ -160,9 +174,9 @@ public class MainFrame {
 		}
 		for(Arc c : graph.getArcs()){
 			if((graph.getSommet(c.getSource()).getFrag().toString().equals(G.toString()) && c.getSrcC()) && (graph.getSommet(c.getDestination()).getFrag().toString().equals(T.toString()) && c.getDstC()))
-				System.out.println(c.getSource()+1+"(complementaire: "+c.getSrcC()+") --> "+(c.getDestination()+1)+"(complementaire: "+c.getDstC()+") score: "+c.getScore()+" i = "+c.getI()+" j = "+c.getJ());
+				System.out.println(c.getSource()+1+"(complementaire: "+c.getSrcC()+") --> "+(c.getDestination()+1)+"(complementaire: "+c.getDstC()+") score: "+c.getScore());
 			if((graph.getSommet(c.getSource()).getFrag().toString().equals(T.toString()) && c.getSrcC()) && (graph.getSommet(c.getDestination()).getFrag().toString().equals(G.toString()) && c.getDstC()))
-				System.out.println(c.getSource()+1+"(complementaire: "+c.getSrcC()+") --> "+(c.getDestination()+1)+"(complementaire: "+c.getDstC()+") score: "+c.getScore()+" i = "+c.getI()+" j = "+c.getJ());
+				System.out.println(c.getSource()+1+"(complementaire: "+c.getSrcC()+") --> "+(c.getDestination()+1)+"(complementaire: "+c.getDstC()+") score: "+c.getScore());
 		}
 		System.out.print("\n");
 		System.out.print("\n");
@@ -228,7 +242,7 @@ public class MainFrame {
 				Thread t = new Thread(){
 					@Override
 					public void run() {
-						MainFrame.run2(run1());
+						MainFrame.run2(false ,run1(false,null),null,null);
 					}
 				};
 				if(open.getPath() != null)
@@ -262,23 +276,25 @@ public class MainFrame {
 		log.insert(_log,log.getText().length());
 	}
 
-	public static Overlap run1(){
+	public static Overlap run1(boolean term , String input){
 		String logg = "\n";
 		Overlap graph;
-		graph = Overlap.build(open.getPath());
-		//graph = Overlap.build("/home/nanabaskint/Git/BioInfo_project/datas/Collections/10000/collection1.fasta");
+		if(term)
+			graph = Overlap.build(input);
+		else
+			graph = Overlap.build(open.getPath());
 		int  n = graph.getSommets().size();
-
 		logg+=" \n"+"> # fragments d'ADN  n = "+n;
 		logg+=" \n"+"> # alignements a calculer => (n*(n-1))*4 = "+(n*(n-1))*4;
 		logg+="\n> # alignements à prendre theorie : "+(n-1);
 		logg+="\n------------------------------------------------";
-		//System.out.println(logg);
-		log(logg);
+		if(term)
+			System.out.println(logg);
+		else
+			log(logg);
 		return graph;
 	}
-
-	public static void run2(Overlap graph){
+	public static void run2(boolean term,Overlap graph,String output1, String output2){
 		int  n = graph.getSommets().size();
 		String logg = "";
 		long debut = System.currentTimeMillis();
@@ -286,36 +302,59 @@ public class MainFrame {
 		graph.run();
 		logg+="\n Temps calcule des alignements : "+(double)(System.currentTimeMillis()-debut)/1000+"s";
 		logg+="\n> # alignements manquants  : " +(((n*(n-1))*4)- graph.getArcs().size() );
-		log(logg);
+		if(term)
+			System.out.println(logg);
+		else
+			log(logg);
 		logg = "";
+		//for(Arc c : graph.getArcs()){
+	//		System.out.println(" score: "+c.getScore());
+	//	}
 		debut = System.currentTimeMillis();
 		graph.sort();
+		System.out.println(" score: ");
+		/*for(Arc c : graph.getArcs()){
+			System.out.println(" score: "+c.getScore());
+		}*/
 		logg+="\n Temps calcul trie des alignements : "+(double)(System.currentTimeMillis()-debut)/1000+"s";
-		log(logg);
+		if(term)
+			System.out.println(logg);
+		else
+			log(logg);
 		logg = "";
 		debut = System.currentTimeMillis();
 		ArrayList<Arc> arcs = HamiltonPath.greedy(graph);
 		logg+="\n Temps calcul chemin Hamiltonien  : "+(double)(System.currentTimeMillis()-debut)/1000+"s";
 		logg+="\n Temps total : "+(double)(System.currentTimeMillis()-debut2)/1000+"s";
-		log(logg);
+		if(term)
+			System.out.println(logg);
+		else
+			log(logg);
 		logg = "";
-		//for(Arc arc : arcs)
-		//	System.out.print(arc.getSource() + " - " );
-		//System.out.println(arcs.get(arcs.size()-1).getDestination());
+		/*for(Arc arc : arcs)
+			System.out.print(arc.getSource() + " - " );
+		System.out.println(arcs.get(arcs.size()-1).getDestination());*/
 		logg+="\n> # alignements selectionés : "+ arcs.size();
 		//System.out.println(logg);
-		log(logg);
+		if(term)
+			System.out.println(logg);
+		else
+			log(logg);
 		
 		//on crée un objet consensus
 		Consensus c = new Consensus(graph, arcs);
 		//voila le résultat
+
 		String cons = c.consensus();
 		System.out.println(cons.length());
-		
-		/*
-		 * on a aussi une méthode pour formater le résultat dans un fichier
-		 * c.printConsensusInFile(file);
-		 */
+		System.out.println(cons);
+		//on a aussi une méthode pour formater le résultat dans un fichier
+		//sauver consensus init
+		if(output1!=null)
+			c.printConsensusInFile(new File(output1));
+		//sauver consensus complementaire
+		if(output2!=null)
+			c.printConsensusInFile(new File(output2));
 		
 	}
 }

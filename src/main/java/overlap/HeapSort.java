@@ -11,25 +11,26 @@ public class HeapSort {
 		ArrayList<Arc> arcs = new ArrayList<Arc>();
 		if(opti){
 			for(int i=(_graph.getArcs().size()-1)/2; i>=0;i--){
-			heapity(_graph.getArcs(),i);
-		}
-		while(!_graph.getArcs().isEmpty()){
-			Arc print = getMax(_graph.getArcs());
-			arcs.add(print);
-		}
+				heapity(_graph.getArcs(),i);
+			}
+			while(!_graph.getArcs().isEmpty()){
+				Arc print = getMax(_graph.getArcs());
+				arcs.add(print);
+			}
 		}
 		else{
 			int index=-1;
-			int score = -1;
-			while(!_graph.getArcs().isEmpty()){
+			int score = Integer.MIN_VALUE;
+			int nbrofelet = _graph.getArcs().size();
+			for(int i = 0; i<nbrofelet;i++) {
 				for(int k = 0; k<_graph.getArcs().size();k++) {
 					if(score<_graph.getArc(k).getScore()){
 						score = _graph.getArc(k).getScore();
 						index = k;
 					}
 				}
-				arcs.add(_graph.getArcs().remove(index));
-				score = -1;
+				arcs.add(i,_graph.getArcs().remove(index));
+				score = Integer.MIN_VALUE;
 				index = -1;
 			}
 		}
@@ -42,14 +43,11 @@ public class HeapSort {
 		toSort.set(index2, tmp);
 	}
 	private static Arc getMax(ArrayList<Arc> toSort){
-		Arc retour;
+		Arc retour= toSort.remove(0);
 		if(toSort.size()>1) {
-			retour = toSort.remove(0);
 			toSort.add(0, toSort.remove(toSort.size() - 1));
 			heapity(toSort, 0);
 		}
-		else
-			retour = toSort.remove(0);
 		return retour;
 	}
 	private static void heapity(ArrayList<Arc> toSort, int i){
