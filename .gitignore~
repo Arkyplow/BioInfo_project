@@ -1,0 +1,9 @@
+# for eclipse users
+.classpath
+.project
+.settings/
+
+# for intellij users
+
+*.iml
+/bin
