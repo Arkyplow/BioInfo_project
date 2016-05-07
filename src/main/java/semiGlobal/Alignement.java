@@ -1,7 +1,5 @@
 package semiGlobal;
 
-import utils.String2Byte;
-
 import java.util.ArrayList;
 
 /**
@@ -152,7 +150,7 @@ public class Alignement {
 		int tmpscore=Integer.MIN_VALUE;
 		int iG = 0,jG = 0;
 		for(int j=1;j<=T.length();j++){
-			if(matrice[G.length()][j]>tmpscore){
+			if(matrice[G.length()][j]>=tmpscore){
 				tmpscore = matrice[G.length()][j];
 				iG=G.length();
 				jG=j;
@@ -169,22 +167,21 @@ public class Alignement {
 		}
 		// on construit les alignement
 		while(jG !=0 && iG !=0){
-			if(matrice[iG][jG] == matrice[iG - 1][jG - 1] + getMatchScore(G.get(iG - 1), T.get(jG - 1))) { //on copie un base de G et une base de T
+			if(matrice[iG][jG] == matrice[iG-1][jG]+getGap()){ // gap en G + recuperer une base dans T
+				ter1.add(0, G.get(iG-1));
+				ter2.add(0,(byte)4);
+				iG--;
+			}
+			else if(matrice[iG][jG] == matrice[iG - 1][jG - 1] + getMatchScore(G.get(iG - 1), T.get(jG - 1))) { //on copie un base de G et une base de T
 				ter1.add(0, G.get(iG-1));
 				ter2.add(0,T.get(jG-1));
 				iG--;
 				jG--;
 			}
-
 			else if(matrice[iG][jG] == matrice[iG][jG-1]+getGap()){ // gap en T + recuperer une base dans G
 				ter1.add(0, (byte) 4);
 				ter2.add(0,T.get(jG-1));
 				jG --;
-			}
-			else if(matrice[iG][jG] == matrice[iG-1][jG]+getGap()){ // gap en G + recuperer une base dans T
-				ter1.add(0, G.get(iG-1));
-				ter2.add(0,(byte)4);
-				iG--;
 			}
 		}
 		// 2 cas possible,

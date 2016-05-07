@@ -37,7 +37,7 @@ En ce qui concerne les arc, se sont des object composé de 5 variables : int ind
 
 \section{Construction du graph}
 La construction des sommet est expliquer dans la section Parser. 
-la construction des arcs se fait comme expliquer ici : pour l'ensemble de nos sommet (qui sont stocké dans une liste et ou l'indice d'un sommet corresponds à son indice dans cette liste), nous créons une tache qui consiste à calculer tous les alignement possible ( 8 pour chaque paire de fragments) entre le fragment contenu dans le sommet et les fragments contenu dans les sommets suivants dans la liste. Une fois cette tache créé, nous l'attribuons à un thread ( nous avons au total 2 fois le nombre de threads disponible sur une machine et ce afin de combler chaque petit "trous" entre les threads disponible sur la machine). Tous les threads renvoient le résultat de leurs taches dans dans une seule et même file. Une fois que tous les threads ont finis leur travail, nous insérons le contenu de la file dans notre arc. LA raison pour laquelle chaque thread ne renvois par directement les résultats obtenu dans le graph et qu'il y a un phénomène de concurrence sur l'accès au graph.  
+la construction des arcs se fait comme expliquer ici : pour l'ensemble de nos sommet (qui sont stocké dans une liste et ou l'indice d'un sommet corresponds à son indice dans cette liste), nous créons une tache qui consiste à calculer tous les alignement possible ( 8 pour chaque paire de fragments) entre le fragment contenu dans le sommet et les fragments contenu dans les sommets 
 
 
 \section{Parser}
