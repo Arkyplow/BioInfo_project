@@ -1,11 +1,12 @@
 package consensus;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
  * Classe s'occupant du vote de majorité il s'agit simplement de
  * compteur et au bout du compte on renvoie le maximum des compteur
- * ou aléatoirement parmis les comteurs maximums
+ * ou aléatoirement parmis les compteurs maximums
  * @author santorin
  *
  */
@@ -53,23 +54,27 @@ public class Counter {
 	 * retourne le compteur ayant la plus grande valeur ou un compteur
 	 * aléatoire parmis ceux de plus grande valeur
 	 * 
-	 * @return le nucléotide choisi sous forme de char
+	 * @return le nucléotide choisi sous forme de byte
 	 */
-	public char getMajority(){
-		if(a > Math.max(Math.max(c, g), t)){
-			return 'a';
-		}else if(c > Math.max(Math.max(a, g), t)){
-			return 'c';
-		}else if(g > Math.max(Math.max(c, a), t)){
-			return 'g';
-		}else if(t > Math.max(Math.max(c, g), a)){
-			return 't';
+	public byte getMajority(){
+		ArrayList<Byte> bytes = new ArrayList<Byte>();
+		if(a >= Math.max(Math.max(c, g), t)){
+			bytes.add((byte) 0);
 		}
-		switch(rand.nextInt(4)){
-			case 0:	return 'a';
-			case 1:	return 'c';
-			case 2: return 'g';
-			case 3:	return 't';
+		if(c >= Math.max(Math.max(a, g), t)){
+			bytes.add((byte) 1);
+		}
+		if(g >= Math.max(Math.max(c, a), t)){
+			bytes.add((byte) 2);
+		}
+		if(t >= Math.max(Math.max(c, g), a)){
+			bytes.add((byte) 3);
+		}
+		if(bytes.size() > 1){
+			return bytes.get(rand.nextInt(bytes.size()));
+		}
+		if(bytes.size() == 1){
+			return bytes.get(0);
 		}
 		return '_';
 		
