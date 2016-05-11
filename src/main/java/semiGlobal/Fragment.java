@@ -6,6 +6,9 @@ package semiGlobal;
  */
 public class Fragment {
 	private byte[] frag;
+	private int leadingGaps = 0;
+	private int trailingGaps = 0;
+	private boolean isInShortForm = false;
 
 	/**
 	 * Constructeur d'un fragment
@@ -68,17 +71,33 @@ public class Fragment {
 	 * @param i l'indice où insérer le gap
 	 */
 	public void insertGap(int i){
-		byte[] newFrag = new byte[frag.length + 1];
-		for(int j = 0; j < newFrag.length; j++){
-			if(i == j){
-				newFrag[j] = 4;
-			}else if(j < i){
-				newFrag[j] = frag[j];
+		boolean done = false;
+		if(isInShortForm){
+			if(i <= leadingGaps){
+				leadingGaps++;
+				done = true;
+			}else if(i >= leadingGaps + frag.length){
+				trailingGaps++;
+				done = true;
 			}else{
-				newFrag[j] = frag[j-1];
+				i -= leadingGaps;
 			}
+			
+
 		}
-		frag = newFrag;
+		if(!done){
+			byte[] newFrag = new byte[frag.length + 1];
+			for(int j = 0; j < newFrag.length; j++){
+				if(i == j){
+					newFrag[j] = 4;
+				}else if(j < i){
+					newFrag[j] = frag[j];
+				}else{
+					newFrag[j] = frag[j-1];
+				}
+			}
+			frag = newFrag;
+		}
 	}
 
 	/**
@@ -136,5 +155,46 @@ public class Fragment {
 			}
 		}
 		return ret;
+	}
+	
+	/**
+	 * Permet de mettre le fragment sous une forme courte, où
+	 * l'on garde le nombre de gap au début et en fin de chaîne dans
+	 * des variables entière
+	 */
+	public void setInShortForm(){
+		isInShortForm = true;
+		int i = 0;
+		int j = frag.length - 1;
+		while(frag[i] == 4 && i < j){
+			i++;
+		}
+		leadingGaps = i;
+		while(frag[j] == 4 && j > i){
+			j--;
+		}
+		trailingGaps = frag.length - j + 1;
+		byte[] newFrag = new byte[(j + 1) - i];
+		for(int k = 0; k < newFrag.length; k++){
+			newFrag[k] = frag[k + i];
+		}
+		frag = newFrag;
+	}
+	
+	/**
+	 * retourne le nombre de gaps au début de la chaîne si
+	 * le fragment est en forme courte
+	 * @return nombre de gaps en début de chaîne
+	 */
+	public int getLeadingGaps(){
+		return leadingGaps;
+	}
+	/**
+	 * retourne le nombre de gaps en fin de chaîne si
+	 * le fragment est en forme courte
+	 * @return nombre de gaps en fin de chaîne
+	 */
+	public int getTrailingGaps(){
+		return trailingGaps;
 	}
 }

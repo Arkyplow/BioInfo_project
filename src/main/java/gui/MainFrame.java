@@ -344,19 +344,16 @@ public class MainFrame {
 		
 		//on crée un objet consensus
 		Consensus c = new Consensus(graph, arcs);
-		//voila le résultat
 
-		String cons = c.consensus();
-		System.out.println(cons.length());
-
-		System.out.println(cons);
-		//on a aussi une méthode pour formater le résultat dans un fichier
+		//on a une méthode pour formater le résultat dans un fichier
 		//sauver consensus init
-		if(output1!=null)
-			c.printConsensusInFile(new File(output1));
-		//sauver consensus complementaire
-		if(output2!=null)
-			c.printConsensusInFile(new File(output2));
+		if(output1==null){
+			output1 = "consensus.fasta";
+		}
+		if(output2==null){
+			output2 = "consensusCompl.fasta";
+		}
+		c.printConsensusInFiles(new File(output1), new File(output2));
 		
 	}
 }
