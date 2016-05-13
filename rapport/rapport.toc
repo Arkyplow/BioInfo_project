@@ -1,2 +1,18 @@
 \contentsline {section}{\numberline {1}Introduction}{1}
-\contentsline {section}{\numberline {2}Conclusion}{2}
+\contentsline {section}{\numberline {2}Impl\IeC {\'e}mentation}{2}
+\contentsline {subsection}{\numberline {2.1}Repr\IeC {\'e}sentation d'un Fragment et de son compl\IeC {\'e}mentaire}{2}
+\contentsline {subsection}{\numberline {2.2}Graphe : sommet et arc}{2}
+\contentsline {subsection}{\numberline {2.3}Construction du graphe}{2}
+\contentsline {subsection}{\numberline {2.4}Parser}{3}
+\contentsline {subsection}{\numberline {2.5}Tri}{3}
+\contentsline {subsection}{\numberline {2.6}Chemin Hamiltonien}{3}
+\contentsline {subsection}{\numberline {2.7}Consensus}{4}
+\contentsline {section}{\numberline {3}R\IeC {\'e}sultats}{4}
+\contentsline {subsection}{\numberline {3.1}Collections simplifi\IeC {\'e}es}{4}
+\contentsline {subsubsection}{\numberline {3.1.1}Collection 1}{4}
+\contentsline {subsubsection}{\numberline {3.1.2}Collection 2}{5}
+\contentsline {subsection}{\numberline {3.2}Collections avec compl\IeC {\'e}mentaires invers\IeC {\'e}s}{6}
+\contentsline {subsubsection}{\numberline {3.2.1}Collection 1}{6}
+\contentsline {subsubsection}{\numberline {3.2.2}Collection 4}{6}
+\contentsline {subsubsection}{\numberline {3.2.3}Collection 5}{7}
+\contentsline {section}{\numberline {4}Conclusion}{7}

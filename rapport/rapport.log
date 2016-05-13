@@ -1,15 +1,15 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2016.2.2)  20 FEB 2016 21:01
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2016.5.2)  13 MAY 2016 04:51
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **rapport.tex
 (./rapport.tex
-LaTeX2e <2014/05/01>
-Babel <3.9l> and hyphenation patterns for 79 languages loaded.
+LaTeX2e <2011/06/27>
+Babel <3.9h> and hyphenation patterns for 78 languages loaded.
 (/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
-Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
 (/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo
-File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
+File: size10.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 )
 \c@part=\count79
 \c@section=\count80
@@ -24,19 +24,19 @@ File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 \bibindent=\dimen102
 )
 (/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
-Package: inputenc 2014/04/30 v1.2b Input encoding file
+Package: inputenc 2008/03/30 v1.1d Input encoding file
 \inpenc@prehook=\toks14
 \inpenc@posthook=\toks15
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
-File: utf8.def 2014/09/29 v1.1m UTF-8 support for inputenc
+File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
 Now handling font encoding OML ...
 ... no UTF-8 mapping file for font encoding OML
 Now handling font encoding T1 ...
 ... processing UTF-8 mapping file for font encoding T1
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/t1enc.dfu
-File: t1enc.dfu 2014/09/29 v1.1m UTF-8 support for inputenc
+File: t1enc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
    defining Unicode char U+00A1 (decimal 161)
    defining Unicode char U+00A3 (decimal 163)
    defining Unicode char U+00AB (decimal 171)
@@ -186,7 +186,7 @@ Now handling font encoding OT1 ...
 ... processing UTF-8 mapping file for font encoding OT1
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/ot1enc.dfu
-File: ot1enc.dfu 2014/09/29 v1.1m UTF-8 support for inputenc
+File: ot1enc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
    defining Unicode char U+00A1 (decimal 161)
    defining Unicode char U+00A3 (decimal 163)
    defining Unicode char U+00B8 (decimal 184)
@@ -217,7 +217,7 @@ Now handling font encoding OMS ...
 ... processing UTF-8 mapping file for font encoding OMS
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/omsenc.dfu
-File: omsenc.dfu 2014/09/29 v1.1m UTF-8 support for inputenc
+File: omsenc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
    defining Unicode char U+00A7 (decimal 167)
    defining Unicode char U+00B6 (decimal 182)
    defining Unicode char U+00B7 (decimal 183)
@@ -248,10 +248,10 @@ File: t1enc.def 2005/09/27 v1.99g Standard LaTeX file
 LaTeX Font Info:    Redeclaring font encoding T1 on input line 43.
 ))
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
-Package: graphicx 2014/04/25 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
 
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
-Package: keyval 2014/05/08 v1.15 key=value parser (DPC)
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
 \KV@toks@=\toks16
 )
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
@@ -279,31 +279,14 @@ Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 \Gin@req@height=\dimen103
 \Gin@req@width=\dimen104
 )
-(/usr/share/texlive/texmf-dist/tex/latex/listings/listings.sty
-\lst@mode=\count88
-\lst@gtempboxa=\box26
-\lst@token=\toks17
-\lst@length=\count89
-\lst@currlwidth=\dimen105
-\lst@column=\count90
-\lst@pos=\count91
-\lst@lostspace=\dimen106
-\lst@width=\dimen107
-\lst@newlines=\count92
-\lst@lineno=\count93
-\lst@maxwidth=\dimen108
-
-(/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
-File: lstmisc.sty 2014/09/06 1.5e (Carsten Heinz)
-\c@lstnumber=\count94
-\lst@skipnumbers=\count95
-\lst@framebox=\box27
-)
-(/usr/share/texlive/texmf-dist/tex/latex/listings/listings.cfg
-File: listings.cfg 2014/09/06 1.5e listings configuration
-))
-Package: listings 2014/09/06 1.5e (Carsten Heinz)
- (./rapport.aux)
+(/usr/share/texlive/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count88
+\float@exts=\toks17
+\float@box=\box26
+\@float@everytoks=\toks18
+\@floatcapt=\box27
+) (./rapport.aux)
 \openout1 = `rapport.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 7.
@@ -318,19 +301,20 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 7.
 LaTeX Font Info:    ... okay on input line 7.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 7.
 LaTeX Font Info:    ... okay on input line 7.
- (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
+
+(/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count96
-\scratchdimen=\dimen109
+\scratchcounter=\count89
+\scratchdimen=\dimen105
 \scratchbox=\box28
-\nofMPsegments=\count97
-\nofMParguments=\count98
-\everyMPshowfont=\toks18
-\MPscratchCnt=\count99
-\MPscratchDim=\dimen110
-\MPnumerator=\count100
-\makeMPintoPDFobject=\count101
-\everyMPtoPDFconversion=\toks19
+\nofMPsegments=\count90
+\nofMParguments=\count91
+\everyMPshowfont=\toks19
+\MPscratchCnt=\count92
+\MPscratchDim=\dimen106
+\MPnumerator=\count93
+\makeMPintoPDFobject=\count94
+\everyMPtoPDFconversion=\toks20
 ) (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
 )
@@ -379,7 +363,6 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-\c@lstlisting=\count102
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <12> on input line 11.
 LaTeX Font Info:    External font `cmex10' loaded for size
@@ -396,29 +379,105 @@ Package pdftex.def Info: illustrations/UMONS_FS.jpg used on input line 14.
  [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./illustrations/UMONS_FS.j
-pg>] (./rapport.toc)
+pg>] (./rapport.toc
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 3.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 3.
+)
 \tf@toc=\write3
 \openout3 = `rapport.toc'.
 
- [1] [1] [2]
-(./rapport.aux) ) 
+ [1]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 33.
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 33.
+ [1] [2] [3]
+<1S.pdf, id=27, 845.0471pt x 597.50829pt>
+File: 1S.pdf Graphic file (type pdf)
+ <use 1S.pdf>
+Package pdftex.def Info: 1S.pdf used on input line 140.
+(pdftex.def)             Requested size: 338.01285pt x 238.99907pt.
+ [4]
+<2S.pdf, id=31, 845.0471pt x 597.50829pt>
+File: 2S.pdf Graphic file (type pdf)
+ <use 2S.pdf>
+Package pdftex.def Info: 2S.pdf used on input line 152.
+(pdftex.def)             Requested size: 338.01285pt x 238.99907pt.
+ [5 <./1S.pdf> <./2S.pdf>] <1.pdf, id=38, 845.0471pt x 597.50829pt>
+File: 1.pdf Graphic file (type pdf)
+ <use 1.pdf>
+Package pdftex.def Info: 1.pdf used on input line 173.
+(pdftex.def)             Requested size: 211.26126pt x 149.3767pt.
+
+<1compl.pdf, id=39, 845.0471pt x 597.50829pt>
+File: 1compl.pdf Graphic file (type pdf)
+ <use 1compl.pdf>
+Package pdftex.def Info: 1compl.pdf used on input line 173.
+(pdftex.def)             Requested size: 211.26126pt x 149.3767pt.
+
+Overfull \hbox (77.52252pt too wide) in paragraph at lines 173--173
+[][][] 
+ []
+
+<4.pdf, id=40, 845.0471pt x 597.50829pt>
+File: 4.pdf Graphic file (type pdf)
+ <use 4.pdf>
+Package pdftex.def Info: 4.pdf used on input line 184.
+(pdftex.def)             Requested size: 211.26126pt x 149.3767pt.
+
+<4compl.pdf, id=41, 845.0471pt x 597.50829pt>
+File: 4compl.pdf Graphic file (type pdf)
+ <use 4compl.pdf>
+Package pdftex.def Info: 4compl.pdf used on input line 184.
+(pdftex.def)             Requested size: 211.26126pt x 149.3767pt.
+
+Overfull \hbox (77.52252pt too wide) in paragraph at lines 184--184
+[][][] 
+ []
+
+<5.pdf, id=42, 845.0471pt x 597.50829pt>
+File: 5.pdf Graphic file (type pdf)
+ <use 5.pdf>
+Package pdftex.def Info: 5.pdf used on input line 195.
+(pdftex.def)             Requested size: 211.26126pt x 149.3767pt.
+
+<5compl.pdf, id=43, 845.0471pt x 597.50829pt>
+File: 5compl.pdf Graphic file (type pdf)
+ <use 5compl.pdf>
+Package pdftex.def Info: 5compl.pdf used on input line 195.
+(pdftex.def)             Requested size: 211.26126pt x 149.3767pt.
+
+Overfull \hbox (77.52252pt too wide) in paragraph at lines 195--195
+[][][] 
+ []
+
+[6 <./1.pdf> <./1compl.pdf> <./4.pdf> <./4compl.pdf>] [7 <./5.pdf> <./5compl.pd
+f>] (./rapport.aux) ) 
 Here is how much of TeX's memory you used:
- 3252 strings out of 493105
- 43784 string characters out of 6137073
- 101647 words of memory out of 5000000
- 6687 multiletter control sequences out of 15000+600000
- 10990 words of font info for 29 fonts, out of 8000000 for 9000
- 1141 hyphenation exceptions out of 8191
- 38i,6n,32p,240b,263s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}</u
-sr/share/texmf/fonts/type1/public/cm-super/sfbx1000.pfb></usr/share/texmf/fonts
-/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf/fonts/type1/public/cm-sup
-er/sfrm1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb></us
-r/share/texmf/fonts/type1/public/cm-super/sfrm1728.pfb>
-Output written on rapport.pdf (4 pages, 91264 bytes).
+ 2034 strings out of 493304
+ 26333 string characters out of 6139872
+ 85496 words of memory out of 5000000
+ 5458 multiletter control sequences out of 15000+600000
+ 11766 words of font info for 30 fonts, out of 8000000 for 9000
+ 957 hyphenation exceptions out of 8191
+ 37i,6n,23p,1474b,265s stack positions out of 5000i,500n,10000p,200000b,80000s
+ </home/santorin/.texmf-var/fonts/pk/ljfour/jknappen/ec/ec
+bx1200.600pk> </home/santorin/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1000.6
+00pk> </home/santorin/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1440.600pk> </
+home/santorin/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk> </home/san
+torin/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1200.600pk> </home/santorin/.t
+exmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1728.600pk></usr/share/texlive/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on rapport.pdf (9 pages, 1578754 bytes).
 PDF statistics:
- 39 PDF objects out of 1000 (max. 8388607)
- 26 compressed objects within 1 object stream
+ 296 PDF objects out of 1000 (max. 8388607)
+ 60 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 46 words of extra memory for PDF output out of 10000 (max. 10000000)
 
